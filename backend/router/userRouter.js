@@ -28,5 +28,3 @@ export function userRouter(req, res) {
   res.writeHead(404);
   res.end('Rota não encontrada');
 }
-
-module.exports = userRouter;

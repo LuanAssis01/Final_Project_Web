@@ -1,4 +1,4 @@
-import { User } from "../models/entities/user";
+import { User } from "../models/entities/user.js";
 
 export const userController = {
   getAll(req, res) {
@@ -53,5 +53,3 @@ export const userController = {
     res.end();
   }
 };
-
-module.exports = userController;
