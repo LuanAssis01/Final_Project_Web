@@ -1,20 +1,21 @@
-import { Attachment } from '../models/entities/attachment.js';
+// controller/commentController.js
+import { Comment } from '../models/entities/comment.js';
 
-export const attachmentController = {
+export const commentController = {
   getAll(req, res) {
-    const attachments = Attachment.getAll();
+    const comments = Comment.getAll();
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(attachments));
+    res.end(JSON.stringify(comments));
   },
 
   getById(req, res, id) {
-    const attachment = Attachment.findById(id);
-    if (!attachment) {
+    const comment = Comment.findById(id);
+    if (!comment) {
       res.writeHead(404);
-      return res.end('Anexo não encontrado');
+      return res.end('Comentário não encontrado');
     }
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(attachment));
+    res.end(JSON.stringify(comment));
   },
 
   create(req, res) {
@@ -22,9 +23,9 @@ export const attachmentController = {
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
       const data = JSON.parse(body);
-      const attachment = Attachment.create(data);
+      const comment = Comment.create(data);
       res.writeHead(201, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(attachment));
+      res.end(JSON.stringify(comment));
     });
   },
 
@@ -33,10 +34,10 @@ export const attachmentController = {
     req.on('data', chunk => body += chunk);
     req.on('end', () => {
       const data = JSON.parse(body);
-      const updated = Attachment.update(id, data);
+      const updated = Comment.update(id, data);
       if (!updated) {
         res.writeHead(404);
-        return res.end('Anexo não encontrado');
+        return res.end('Comentário não encontrado');
       }
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(updated));
@@ -44,8 +45,8 @@ export const attachmentController = {
   },
 
   delete(req, res, id) {
-    const success = Attachment.delete(id);
+    const success = Comment.delete(id);
     res.writeHead(success ? 204 : 404);
-    res.end(success ? undefined : 'Anexo não encontrado');
+    res.end(success ? undefined : 'Comentário não encontrado');
   }
 };
