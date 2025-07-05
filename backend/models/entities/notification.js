@@ -1,10 +1,15 @@
-import { randomUUID } from 'crypto';
-import fs from 'fs';
-import path from 'path';
 import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import fs from 'fs';
+import { randomUUID } from 'crypto';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DATA_PATH = path.join(__dirname, '../../../data/notifications.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const DATA_PATH = join(__dirname, '../../data/notifications.json');
+
+if (!fs.existsSync(DATA_PATH)) {
+  fs.writeFileSync(DATA_PATH, '[]', 'utf-8');
+}
 
 export class Notification {
   constructor(userId, message, sentAt, read = false) {
