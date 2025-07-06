@@ -4,7 +4,6 @@ const tokenMap = {
   'admin-123': 'Admin',
   'prof-456': 'Professor',
   'memb-789': 'CommunityMember',
-  'vis-000': 'Visitor'
 };
 
 export function authMiddleware(req, res, allowedRoles = []) {
