@@ -18,7 +18,10 @@
       <div class="logo">
         <img src="./src/assets/icons/Logo.png" alt="" />
       </div>
-      <nav>
+
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+
+      <nav class="mobile-hidden">
         <ul>
           <li><a href="./home.html" data-page="home" class="home">Home</a></li>
           <li>
@@ -47,7 +50,20 @@
           </li>
         </ul>
       </nav>
+      
       <a href="./src/pages/public/login.html" class="btn-entrar" data-page="login">Entrar</a>
+
+      <!-- Menu lateral escondido -->
+      <aside class="side-menu">
+        <button class="close-menu" aria-label="Fechar menu">&times;</button>
+        <ul>
+          <li><a href="./home.html">Home</a></li>
+          <li><a href="./src/pages/public/projetos.html">Projetos</a></li>
+          <li><a href="./src/pages/public/contato.html">Contato</a></li>
+          <li><a href="./src/pages/public/sobre.html">Sobre</a></li>
+          <li><a href="./src/pages/public/login.html">Entrar</a></li>
+        </ul>
+      </aside>
     </header>
 
     <main>

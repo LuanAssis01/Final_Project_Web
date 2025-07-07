@@ -212,3 +212,60 @@ footer p {
     color: #6B7582;
     font-size: 1.6rem;
 }
+
+/*Responsividade*/
+
+/* Celulares em geral */
+@media (max-width: 768px) {
+  .logo img {
+    height: 25px;
+  }
+  .footer-links {
+    gap: 4rem;
+  }
+  .projetos-destaque {
+    padding: 8rem 8rem;
+  }
+  nav {
+    display: none;
+  }
+  .hero {
+    padding: 8rem 3rem;
+  }
+  .hero-img img {
+    height: auto;
+    min-height: 50rem;
+  }
+  .hero-text {
+    padding: 2rem;
+  }
+  .hero-text h1 {
+    font-size: 4rem;
+  }
+  .hero-text p {
+    margin-bottom: 2rem;
+  }
+  .como-funciona {
+    padding: 5.7rem 8rem;
+  }
+}
+
+/* Tablets (768px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .projetos-destaque {
+    padding: 8rem 8rem;
+  }
+  .footer-links {
+    gap: 4rem;
+  }
+}
+
+/* Laptops e notebooks (1025px a 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  /* Estilos para notebooks/laptops médios */
+}
+
+/* Telas grandes e desktops full HD */
+@media (min-width: 1367px) {
+  /* Estilos para telas grandes */
+}
