@@ -1,14 +1,14 @@
 import { Notification } from '../models/entities/notification.js';
 
 export const notificationController = {
-  getAll(req, res) {
-    const notifications = Notification.getAll();
+  async getAll(req, res) {
+    const notifications = await Notification.getAll();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(notifications));
   },
 
-  getById(req, res, id) {
-    const notification = Notification.findById(id);
+  async getById(req, res, id) {
+    const notification = await Notification.findById(id);
     if (!notification) {
       res.writeHead(404);
       return res.end('Notificação não encontrada');
@@ -17,23 +17,23 @@ export const notificationController = {
     res.end(JSON.stringify(notification));
   },
 
-  create(req, res) {
+  async create(req, res) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const notification = Notification.create(data);
+      const notification = await Notification.create(data);
       res.writeHead(201, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(notification));
     });
   },
 
-  update(req, res, id) {
+  async update(req, res, id) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const updated = Notification.update(id, data);
+      const updated = await Notification.update(id, data);
       if (!updated) {
         res.writeHead(404);
         return res.end('Notificação não encontrada');
@@ -43,8 +43,8 @@ export const notificationController = {
     });
   },
 
-  delete(req, res, id) {
-    const success = Notification.delete(id);
+  async delete(req, res, id) {
+    const success = await Notification.delete(id);
     res.writeHead(success ? 204 : 404);
     res.end(success ? undefined : 'Notificação não encontrada');
   }

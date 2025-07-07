@@ -1,14 +1,14 @@
 import { ParticipationRequest } from '../models/entities/participationRequest.js';
 
 export const participationRequestController = {
-  getAll(req, res) {
-    const requests = ParticipationRequest.getAll();
+  async getAll(req, res) {
+    const requests = await ParticipationRequest.getAll();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(requests));
   },
 
-  getById(req, res, id) {
-    const request = ParticipationRequest.findById(id);
+  async getById(req, res, id) {
+    const request = await ParticipationRequest.findById(id);
     if (!request) {
       res.writeHead(404);
       return res.end('Solicitação não encontrada');
@@ -17,23 +17,23 @@ export const participationRequestController = {
     res.end(JSON.stringify(request));
   },
 
-  create(req, res) {
+  async create(req, res) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const request = ParticipationRequest.create(data);
+      const request = await ParticipationRequest.create(data);
       res.writeHead(201, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(request));
     });
   },
 
-  update(req, res, id) {
+  async update(req, res, id) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const updated = ParticipationRequest.update(id, data);
+      const updated = await ParticipationRequest.update(id, data);
       if (!updated) {
         res.writeHead(404);
         return res.end('Solicitação não encontrada');
@@ -43,8 +43,8 @@ export const participationRequestController = {
     });
   },
 
-  delete(req, res, id) {
-    const success = ParticipationRequest.delete(id);
+  async delete(req, res, id) {
+    const success = await ParticipationRequest.delete(id);
     res.writeHead(success ? 204 : 404);
     res.end(success ? undefined : 'Solicitação não encontrada');
   }

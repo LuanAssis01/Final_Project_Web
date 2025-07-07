@@ -1,15 +1,22 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs';
+import { promises as fs } from 'fs';
 import { randomUUID } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const DATA_PATH = join(__dirname, '../../data/users.json');
+const DATA_PATH = join(__dirname, '../../data/user.json');
 
-if (!fs.existsSync(DATA_PATH)) {
-  fs.writeFileSync(DATA_PATH, '[]', 'utf-8');
-}
+const ensureFileExists = async () => {
+  try {
+    await fs.access(DATA_PATH);
+  } catch {
+    await fs.writeFile(DATA_PATH, '[]', 'utf-8');
+  }
+};
+
+await ensureFileExists();
+
 export class User {
   constructor(name, email, password, role) {
     this.id = randomUUID();
@@ -19,45 +26,42 @@ export class User {
     this.role = role;
   }
 
-  static getAll() {
-    if (!fs.existsSync(DATA_PATH)) return [];
-    const data = fs.readFileSync(DATA_PATH);
+  static async getAll() {
+    const data = await fs.readFile(DATA_PATH, 'utf-8');
     return JSON.parse(data);
   }
 
-  static saveAll(users) {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(users, null, 2));
+  static async saveAll(users) {
+    await fs.writeFile(DATA_PATH, JSON.stringify(users, null, 2));
   }
 
-  static findById(id) {
-    return this.getAll().find(user => user.id === id);
+  static async findById(id) {
+    const users = await this.getAll();
+    return users.find(user => user.id === id);
   }
 
-  static create(userData) {
-    const users = this.getAll();
+  static async create(userData) {
+    const users = await this.getAll();
     const user = new User(userData.name, userData.email, userData.password, userData.role);
     users.push(user);
-    this.saveAll(users);
+    await this.saveAll(users);
     return user;
   }
 
-  static update(id, updatedData) {
-    const users = this.getAll();
+  static async update(id, updatedData) {
+    const users = await this.getAll();
     const index = users.findIndex(user => user.id === id);
     if (index === -1) return null;
-
     users[index] = { ...users[index], ...updatedData };
-    this.saveAll(users);
+    await this.saveAll(users);
     return users[index];
   }
 
-  static delete(id) {
-    let users = this.getAll();
-    const originalLength = users.length;
-    users = users.filter(user => user.id !== id);
-    if (users.length === originalLength) return false;
-
-    this.saveAll(users);
+  static async delete(id) {
+    const users = await this.getAll();
+    const filtered = users.filter(user => user.id !== id);
+    if (filtered.length === users.length) return false;
+    await this.saveAll(filtered);
     return true;
   }
 }

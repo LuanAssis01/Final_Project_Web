@@ -1,62 +1,118 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs';
+import fs from 'fs/promises';
 import { randomUUID } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const DATA_PATH = join(__dirname, '../../data/impactMetrics.json');
 
-if (!fs.existsSync(DATA_PATH)) {
-  fs.writeFileSync(DATA_PATH, '[]', 'utf-8');
-}
+const ensureFileExists = async () => {
+  try {
+    await fs.access(DATA_PATH);
+  } catch {
+    await fs.writeFile(DATA_PATH, '[]', 'utf-8');
+  }
+};
+
+await ensureFileExists();
 
 export class ImpactMetric {
-  constructor(projectId, name, value, measuredAt) {
+  constructor(projectId, name, value, measuredAt = new Date().toISOString()) {
     this.id = randomUUID();
     this.projectId = projectId;
     this.name = name;
     this.value = value;
     this.measuredAt = measuredAt;
+    this.lastUpdated = new Date().toISOString();
   }
 
-  static getAll() {
-    if (!fs.existsSync(DATA_PATH)) return [];
-    const data = fs.readFileSync(DATA_PATH);
-    return JSON.parse(data);
+  static async getAll() {
+    try {
+      const data = await fs.readFile(DATA_PATH, 'utf-8');
+      return JSON.parse(data);
+    } catch (err) {
+      console.error('Error reading metrics file:', err);
+      return [];
+    }
   }
 
-  static saveAll(metrics) {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(metrics, null, 2));
+  static async saveAll(metrics) {
+    try {
+      await fs.writeFile(DATA_PATH, JSON.stringify(metrics, null, 2));
+    } catch (err) {
+      console.error('Error saving metrics:', err);
+      throw err;
+    }
   }
 
-  static findById(id) {
-    return this.getAll().find(m => m.id === id);
+  static async findById(id) {
+    const metrics = await this.getAll();
+    return metrics.find(m => m.id === id);
   }
 
-  static create(data) {
-    const metrics = this.getAll();
-    const metric = new ImpactMetric(data.projectId, data.name, data.value, data.measuredAt);
+  static async findByProjectId(projectId) {
+    const metrics = await this.getAll();
+    return metrics.filter(m => m.projectId === projectId);
+  }
+
+  static async findByName(name) {
+    const metrics = await this.getAll();
+    return metrics.filter(m => m.name === name);
+  }
+
+  static async create(data) {
+    const metrics = await this.getAll();
+    const metric = new ImpactMetric(
+      data.projectId,
+      data.name,
+      data.value,
+      data.measuredAt
+    );
     metrics.push(metric);
-    this.saveAll(metrics);
+    await this.saveAll(metrics);
     return metric;
   }
 
-  static update(id, updatedData) {
-    const metrics = this.getAll();
+  static async update(id, updatedData) {
+    const metrics = await this.getAll();
     const index = metrics.findIndex(m => m.id === id);
+    
     if (index === -1) return null;
-    metrics[index] = { ...metrics[index], ...updatedData };
-    this.saveAll(metrics);
-    return metrics[index];
+    
+    const updatedMetric = {
+      ...metrics[index],
+      ...updatedData,
+      lastUpdated: new Date().toISOString(),
+      id: metrics[index].id
+    };
+    
+    metrics[index] = updatedMetric;
+    await this.saveAll(metrics);
+    return updatedMetric;
   }
 
-  static delete(id) {
-    let metrics = this.getAll();
+  static async delete(id) {
+    const metrics = await this.getAll();
     const originalLength = metrics.length;
-    metrics = metrics.filter(m => m.id !== id);
-    if (metrics.length === originalLength) return false;
-    this.saveAll(metrics);
+    const filteredMetrics = metrics.filter(m => m.id !== id);
+    
+    if (filteredMetrics.length === originalLength) {
+      return false;
+    }
+    
+    await this.saveAll(filteredMetrics);
     return true;
+  }
+
+  static async getMetricsSummary(projectId) {
+    const metrics = await this.findByProjectId(projectId);
+    return {
+      count: metrics.length,
+      metricsByType: metrics.reduce((acc, metric) => {
+        acc[metric.name] = (acc[metric.name] || 0) + metric.value;
+        return acc;
+      }, {})
+    };
   }
 }

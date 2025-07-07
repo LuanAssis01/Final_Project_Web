@@ -1,14 +1,14 @@
 import { Profile } from '../models/entities/profile.js';
 
 export const profileController = {
-  getAll(req, res) {
-    const profiles = Profile.getAll();
+  async getAll(req, res) {
+    const profiles = await Profile.getAll();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(profiles));
   },
 
-  getById(req, res, id) {
-    const profile = Profile.findById(id);
+  async getById(req, res, id) {
+    const profile = await Profile.findById(id);
     if (!profile) {
       res.writeHead(404);
       return res.end('Perfil não encontrado');
@@ -17,23 +17,23 @@ export const profileController = {
     res.end(JSON.stringify(profile));
   },
 
-  create(req, res) {
+  async create(req, res) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const profile = Profile.create(data);
+      const profile = await Profile.create(data);
       res.writeHead(201, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(profile));
     });
   },
 
-  update(req, res, id) {
+  async update(req, res, id) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const updated = Profile.update(id, data);
+      const updated = await Profile.update(id, data);
       if (!updated) {
         res.writeHead(404);
         return res.end('Perfil não encontrado');
@@ -43,8 +43,8 @@ export const profileController = {
     });
   },
 
-  delete(req, res, id) {
-    const success = Profile.delete(id);
+  async delete(req, res, id) {
+    const success = await Profile.delete(id);
     res.writeHead(success ? 204 : 404);
     res.end(success ? undefined : 'Perfil não encontrado');
   }

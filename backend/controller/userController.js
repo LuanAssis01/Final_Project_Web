@@ -1,14 +1,14 @@
 import { User } from "../models/entities/user.js";
 
 export const userController = {
-  getAll(req, res) {
-    const users = User.getAll();
+  async getAll(req, res) {
+    const users = await User.getAll();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(users));
   },
 
-  getById(req, res, id) {
-    const user = User.findById(id);
+  async getById(req, res, id) {
+     const user = await User.findById(id);
     if (!user) {
       res.writeHead(404);
       return res.end('Usuário não encontrado');
@@ -17,23 +17,23 @@ export const userController = {
     res.end(JSON.stringify(user));
   },
 
-  create(req, res) {
+  async create(req, res) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const newUser = User.create(data);
+      const newUser = await User.create(data); // <- await aqui
       res.writeHead(201, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(newUser));
     });
   },
 
-  update(req, res, id) {
+  async update(req, res, id) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const updatedUser = User.update(id, data);
+      const updatedUser = await User.update(id, data); // <- await aqui
       if (!updatedUser) {
         res.writeHead(404);
         return res.end('Usuário não encontrado');
@@ -43,8 +43,8 @@ export const userController = {
     });
   },
 
-  delete(req, res, id) {
-    const success = User.delete(id);
+  async delete(req, res, id) {
+    const success = await User.delete(id);
     if (!success) {
       res.writeHead(404);
       return res.end('Usuário não encontrado');
