@@ -2,14 +2,14 @@
   {
     "id": "cae2ec00-2c52-49ae-89da-9a2a26176c1d",
     "name": "João Silva",
-    "email": "joao@email.com",
+    "email": "joao@gmail.com",
     "password": "123456",
     "role": "CommunityMember"
   },
   {
     "id": "bb3cf550-b556-4773-a167-e0c304ec2ff7",
     "name": "luan",
-    "email": "luan@email.com",
+    "email": "luan@gmail.com",
     "password": "122414",
     "role": "Admin"
   }
