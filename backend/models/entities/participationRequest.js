@@ -1,16 +1,21 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs';
+import fs from 'fs/promises';
 import { randomUUID } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const DATA_PATH = join(__dirname, '../../data/participationRequests.json');
 
-if (!fs.existsSync(DATA_PATH)) {
-  fs.writeFileSync(DATA_PATH, '[]', 'utf-8');
-}
+const ensureFileExists = async () => {
+  try {
+    await fs.access(DATA_PATH);
+  } catch {
+    await fs.writeFile(DATA_PATH, '[]', 'utf-8');
+  }
+};
 
+await ensureFileExists();
 
 export class ParticipationRequest {
   constructor(projectId, userId, requestedAt, status = 'PENDING') {
@@ -19,45 +24,87 @@ export class ParticipationRequest {
     this.userId = userId;
     this.requestedAt = requestedAt;
     this.status = status;
+    this.processedAt = null; // Adicionado campo para rastrear quando foi processado
+    this.processedBy = null; // Adicionado campo para rastrear quem processou
   }
 
-  static getAll() {
-    if (!fs.existsSync(DATA_PATH)) return [];
-    const data = fs.readFileSync(DATA_PATH);
-    return JSON.parse(data);
+  static async getAll() {
+    try {
+      const data = await fs.readFile(DATA_PATH, 'utf-8');
+      return JSON.parse(data);
+    } catch (err) {
+      return [];
+    }
   }
 
-  static saveAll(requests) {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(requests, null, 2));
+  static async saveAll(requests) {
+    await fs.writeFile(DATA_PATH, JSON.stringify(requests, null, 2));
   }
 
-  static findById(id) {
-    return this.getAll().find(r => r.id === id);
+  static async findById(id) {
+    const requests = await this.getAll();
+    return requests.find(r => r.id === id);
   }
 
-  static create(data) {
-    const requests = this.getAll();
-    const newRequest = new ParticipationRequest(data.projectId, data.userId, data.requestedAt, data.status);
+  static async findByProjectId(projectId) {
+    const requests = await this.getAll();
+    return requests.filter(r => r.projectId === projectId);
+  }
+
+  static async findByUserId(userId) {
+    const requests = await this.getAll();
+    return requests.filter(r => r.userId === userId);
+  }
+
+  static async create(data) {
+    const requests = await this.getAll();
+    const newRequest = new ParticipationRequest(
+      data.projectId,
+      data.userId,
+      data.requestedAt || new Date().toISOString(), // Data atual se não for fornecida
+      data.status
+    );
     requests.push(newRequest);
-    this.saveAll(requests);
+    await this.saveAll(requests);
     return newRequest;
   }
 
-  static update(id, updatedData) {
-    const requests = this.getAll();
+  static async update(id, updatedData) {
+    const requests = await this.getAll();
     const index = requests.findIndex(r => r.id === id);
     if (index === -1) return null;
+    
+    // Se o status está sendo atualizado, registra quando e por quem (se aplicável)
+    if (updatedData.status && updatedData.status !== requests[index].status) {
+      updatedData.processedAt = new Date().toISOString();
+      if (updatedData.processedBy) {
+        updatedData.processedBy = updatedData.processedBy;
+      }
+    }
+    
     requests[index] = { ...requests[index], ...updatedData };
-    this.saveAll(requests);
+    await this.saveAll(requests);
     return requests[index];
   }
 
-  static delete(id) {
-    let requests = this.getAll();
+  static async delete(id) {
+    const requests = await this.getAll();
     const originalLength = requests.length;
-    requests = requests.filter(r => r.id !== id);
-    if (requests.length === originalLength) return false;
-    this.saveAll(requests);
+    const filteredRequests = requests.filter(r => r.id !== id);
+    
+    if (filteredRequests.length === originalLength) {
+      return false;
+    }
+    
+    await this.saveAll(filteredRequests);
     return true;
+  }
+
+  static async changeStatus(id, newStatus, processedBy = null) {
+    return this.update(id, {
+      status: newStatus,
+      processedAt: new Date().toISOString(),
+      processedBy
+    });
   }
 }

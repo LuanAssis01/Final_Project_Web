@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "88bbdf93-a74c-4a97-8c54-e9173fa2df81",
+    "title": "Projeto de Extensão",
+    "description": "Descrição do projeto",
+    "thematicArea": "Educação",
+    "category": "Extensão",
+    "startDate": "2024-01-01",
+    "endDate": "2024-12-31",
+    "status": "Active",
+    "metrics": [],
+    "attachments": [],
+    "comments": [],
+    "requests": [],
+    "history": []
+  }
+]

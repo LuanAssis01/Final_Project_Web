@@ -1,11 +1,19 @@
 export class Filter {
-  static apply(projects, filters) {
+  constructor({ area, category, location, status }) {
+    this.area = area;
+    this.category = category;
+    this.location = location;
+    this.status = status;
+  }
+
+  async apply(projects) {
     return projects.filter(project => {
-      const matchArea = !filters.area || project.thematicArea === filters.area;
-      const matchCategory = !filters.category || project.category === filters.category;
-      const matchLocation = !filters.location || project.location === filters.location;
-      const matchStatus = !filters.status || project.status === filters.status;
-      return matchArea && matchCategory && matchLocation && matchStatus;
+      return (
+        (!this.area || project.thematicArea === this.area) &&
+        (!this.category || project.category === this.category) &&
+        (!this.location || project.location === this.location) &&
+        (!this.status || project.status === this.status)
+      );
     });
   }
 }
