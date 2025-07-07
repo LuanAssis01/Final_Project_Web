@@ -1,7 +1,27 @@
 import { Profile } from '../models/entities/profile.js';
 import { User } from '../models/entities/user.js';
 
-// Validador de dados do perfil
+const sendResponse = (res, statusCode, data = null, headers = {}) => {
+  const defaultHeaders = { 'Content-Type': 'application/json' };
+  res.writeHead(statusCode, { ...defaultHeaders, ...headers });
+  res.end(data ? JSON.stringify(data) : undefined);
+};
+
+const parseRequestBody = (req) => {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (error) {
+        reject(new Error('Invalid JSON format'));
+      }
+    });
+    req.on('error', reject);
+  });
+};
+
 const validateProfileData = (data) => {
   const errors = [];
   
@@ -20,12 +40,10 @@ export const profileController = {
   async getAll(req, res) {
     try {
       const profiles = await Profile.getAll();
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(profiles));
+      return sendResponse(res, 200, profiles);
     } catch (error) {
       console.error('Error getting profiles:', error);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Internal server error' }));
+      return sendResponse(res, 500, { error: 'Internal server error' });
     }
   },
 
@@ -33,11 +51,10 @@ export const profileController = {
     try {
       const profile = await Profile.findById(id);
       if (!profile) {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Profile not found' }));
+        return sendResponse(res, 404, { error: 'Profile not found' });
       }
       
-      // Busca informações básicas do usuário associado
+      // Busca informações do usuário
       const user = await User.findById(profile.userId);
       if (user) {
         profile.user = {
@@ -47,12 +64,10 @@ export const profileController = {
         };
       }
       
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(profile));
+      return sendResponse(res, 200, profile);
     } catch (error) {
       console.error('Error getting profile:', error);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Internal server error' }));
+      return sendResponse(res, 500, { error: 'Internal server error' });
     }
   },
 
@@ -60,120 +75,86 @@ export const profileController = {
     try {
       const profile = await Profile.findByUserId(userId);
       if (!profile) {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Profile not found' }));
+        return sendResponse(res, 404, { error: 'Profile not found' });
       }
       
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(profile));
+      return sendResponse(res, 200, profile);
     } catch (error) {
       console.error('Error getting profile by user ID:', error);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Internal server error' }));
+      return sendResponse(res, 500, { error: 'Internal server error' });
     }
   },
 
   async create(req, res) {
-    let body = '';
-    req.on('data', chunk => body += chunk);
-    
-    req.on('end', async () => {
-      try {
-        const data = JSON.parse(body);
-        
-        if (!data.userId) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ error: 'userId is required' }));
-        }
-
-        const validationErrors = validateProfileData(data);
-        if (validationErrors) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ errors: validationErrors }));
-        }
-
-        // Verifica se já existe perfil para este usuário
-        const existingProfile = await Profile.findByUserId(data.userId);
-        if (existingProfile) {
-          res.writeHead(409, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ error: 'Profile already exists for this user' }));
-        }
-
-        const profile = await Profile.create(data);
-        
-        res.writeHead(201, { 
-          'Content-Type': 'application/json',
-          'Location': `/profiles/${profile.id}`
-        });
-        res.end(JSON.stringify(profile));
-      } catch (error) {
-        if (error instanceof SyntaxError) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Invalid JSON format' }));
-        } else {
-          console.error('Error creating profile:', error);
-          res.writeHead(500, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Internal server error' }));
-        }
+    try {
+      const data = await parseRequestBody(req);
+      
+      if (!data.userId) {
+        return sendResponse(res, 400, { error: 'userId is required' });
       }
-    });
+
+      const validationErrors = validateProfileData(data);
+      if (validationErrors) {
+        return sendResponse(res, 400, { errors: validationErrors });
+      }
+
+      const existingProfile = await Profile.findByUserId(data.userId);
+      if (existingProfile) {
+        return sendResponse(res, 409, { error: 'Profile already exists for this user' });
+      }
+
+      const profile = await Profile.create(data);
+      return sendResponse(res, 201, profile, {
+        'Location': `/profiles/${profile.id}`
+      });
+    } catch (error) {
+      if (error.message === 'Invalid JSON format') {
+        return sendResponse(res, 400, { error: error.message });
+      }
+      console.error('Error creating profile:', error);
+      return sendResponse(res, 500, { error: 'Internal server error' });
+    }
   },
 
   async update(req, res, id) {
-    let body = '';
-    req.on('data', chunk => body += chunk);
-    
-    req.on('end', async () => {
-      try {
-        const data = JSON.parse(body);
-        const validationErrors = validateProfileData(data);
-        
-        if (validationErrors) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ errors: validationErrors }));
-        }
-
-        // Não permite alterar o userId
-        if (data.userId) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ error: 'userId cannot be changed' }));
-        }
-
-        const updatedProfile = await Profile.update(id, data);
-        if (!updatedProfile) {
-          res.writeHead(404, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ error: 'Profile not found' }));
-        }
-        
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(updatedProfile));
-      } catch (error) {
-        if (error instanceof SyntaxError) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Invalid JSON format' }));
-        } else {
-          console.error('Error updating profile:', error);
-          res.writeHead(500, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Internal server error' }));
-        }
+    try {
+      const data = await parseRequestBody(req);
+      const validationErrors = validateProfileData(data);
+      
+      if (validationErrors) {
+        return sendResponse(res, 400, { errors: validationErrors });
       }
-    });
+
+      if (data.userId) {
+        return sendResponse(res, 400, { error: 'userId cannot be changed' });
+      }
+
+      const updatedProfile = await Profile.update(id, data);
+      if (!updatedProfile) {
+        return sendResponse(res, 404, { error: 'Profile not found' });
+      }
+      
+      return sendResponse(res, 200, updatedProfile);
+    } catch (error) {
+      if (error.message === 'Invalid JSON format') {
+        return sendResponse(res, 400, { error: error.message });
+      }
+      console.error('Error updating profile:', error);
+      return sendResponse(res, 500, { error: 'Internal server error' });
+    }
   },
 
   async delete(req, res, id) {
     try {
       const success = await Profile.delete(id);
       if (!success) {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Profile not found' }));
+        return sendResponse(res, 404, { error: 'Profile not found' });
       }
       
-      res.writeHead(204);
-      res.end();
+      return sendResponse(res, 204);
     } catch (error) {
       console.error('Error deleting profile:', error);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Internal server error' }));
+      return sendResponse(res, 500, { error: 'Internal server error' });
     }
   }
 };

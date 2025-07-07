@@ -5,5 +5,12 @@
     "email": "joao@email.com",
     "password": "123456",
     "role": "CommunityMember"
+  },
+  {
+    "id": "bb3cf550-b556-4773-a167-e0c304ec2ff7",
+    "name": "luan",
+    "email": "luan@email.com",
+    "password": "122414",
+    "role": "Admin"
   }
 ]

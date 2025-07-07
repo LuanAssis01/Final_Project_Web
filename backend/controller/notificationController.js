@@ -1,5 +1,26 @@
 import { Notification } from '../models/entities/notification.js';
 
+const sendResponse = (res, statusCode, data = null, headers = {}) => {
+  const defaultHeaders = { 'Content-Type': 'application/json' };
+  res.writeHead(statusCode, { ...defaultHeaders, ...headers });
+  res.end(data ? JSON.stringify(data) : undefined);
+};
+
+const parseRequestBody = (req) => {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (error) {
+        reject(new Error('Invalid JSON format'));
+      }
+    });
+    req.on('error', reject);
+  });
+};
+
 const validateNotificationData = (data) => {
   const errors = [];
   
@@ -18,7 +39,7 @@ export const notificationController = {
       const { userId, read } = req.query;
       let notifications = await Notification.getAll();
       
-      // Filtros opcionais
+      // Aplicar filtros
       if (userId) {
         notifications = notifications.filter(n => n.userId === userId);
       }
@@ -27,12 +48,10 @@ export const notificationController = {
         notifications = notifications.filter(n => n.read === isRead);
       }
       
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(notifications));
+      return sendResponse(res, 200, notifications);
     } catch (error) {
       console.error('Error getting notifications:', error);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Internal server error' }));
+      return sendResponse(res, 500, { error: 'Internal server error' });
     }
   },
 
@@ -40,110 +59,100 @@ export const notificationController = {
     try {
       const notification = await Notification.findById(id);
       if (!notification) {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Notification not found' }));
+        return sendResponse(res, 404, { error: 'Notification not found' });
       }
       
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(notification));
+      return sendResponse(res, 200, notification);
     } catch (error) {
       console.error('Error getting notification:', error);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Internal server error' }));
+      return sendResponse(res, 500, { error: 'Internal server error' });
     }
   },
 
   async create(req, res) {
-    let body = '';
-    req.on('data', chunk => body += chunk);
-    
-    req.on('end', async () => {
-      try {
-        const data = JSON.parse(body);
-        const validationErrors = validateNotificationData(data);
-        
-        if (validationErrors) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ errors: validationErrors }));
-        }
-
-        // Set default values
-        if (typeof data.read === 'undefined') {
-          data.read = false;
-        }
-        if (!data.createdAt) {
-          data.createdAt = new Date().toISOString();
-        }
-
-        const notification = await Notification.create(data);
-        
-        res.writeHead(201, { 
-          'Content-Type': 'application/json',
-          'Location': `/notifications/${notification.id}`
-        });
-        res.end(JSON.stringify(notification));
-      } catch (error) {
-        if (error instanceof SyntaxError) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Invalid JSON format' }));
-        } else {
-          console.error('Error creating notification:', error);
-          res.writeHead(500, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Internal server error' }));
-        }
+    try {
+      const data = await parseRequestBody(req);
+      const validationErrors = validateNotificationData(data);
+      
+      if (validationErrors) {
+        return sendResponse(res, 400, { errors: validationErrors });
       }
-    });
+
+      // Set default values
+      const notificationData = {
+        ...data,
+        read: data.read || false,
+        createdAt: data.createdAt || new Date().toISOString()
+      };
+
+      const notification = await Notification.create(notificationData);
+      
+      return sendResponse(res, 201, notification, {
+        'Location': `/notifications/${notification.id}`
+      });
+    } catch (error) {
+      if (error.message === 'Invalid JSON format') {
+        return sendResponse(res, 400, { error: error.message });
+      }
+      console.error('Error creating notification:', error);
+      return sendResponse(res, 500, { error: 'Internal server error' });
+    }
   },
 
   async update(req, res, id) {
-    let body = '';
-    req.on('data', chunk => body += chunk);
-    
-    req.on('end', async () => {
-      try {
-        const data = JSON.parse(body);
-        
-        // Não permite alterar o userId
-        if (data.userId) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ error: 'userId cannot be changed' }));
-        }
-
-        const updatedNotification = await Notification.update(id, data);
-        if (!updatedNotification) {
-          res.writeHead(404, { 'Content-Type': 'application/json' });
-          return res.end(JSON.stringify({ error: 'Notification not found' }));
-        }
-        
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify(updatedNotification));
-      } catch (error) {
-        if (error instanceof SyntaxError) {
-          res.writeHead(400, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Invalid JSON format' }));
-        } else {
-          console.error('Error updating notification:', error);
-          res.writeHead(500, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ error: 'Internal server error' }));
-        }
+    try {
+      const data = await parseRequestBody(req);
+      
+      // Não permite alterar o userId
+      if (data.userId) {
+        return sendResponse(res, 400, { error: 'userId cannot be changed' });
       }
-    });
+
+      const updatedNotification = await Notification.update(id, data);
+      if (!updatedNotification) {
+        return sendResponse(res, 404, { error: 'Notification not found' });
+      }
+      
+      return sendResponse(res, 200, updatedNotification);
+    } catch (error) {
+      if (error.message === 'Invalid JSON format') {
+        return sendResponse(res, 400, { error: error.message });
+      }
+      console.error('Error updating notification:', error);
+      return sendResponse(res, 500, { error: 'Internal server error' });
+    }
   },
 
   async markAsRead(req, res, id) {
     try {
       const updated = await Notification.update(id, { read: true });
       if (!updated) {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Notification not found' }));
+        return sendResponse(res, 404, { error: 'Notification not found' });
       }
       
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(updated));
+      return sendResponse(res, 200, updated);
     } catch (error) {
       console.error('Error marking notification as read:', error);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Internal server error' }));
+      return sendResponse(res, 500, { error: 'Internal server error' });
+    }
+  },
+
+  async markAllAsRead(req, res) {
+    try {
+      const { userId } = req.query;
+      if (!userId) {
+        return sendResponse(res, 400, { error: 'userId query parameter is required' });
+      }
+
+      const success = await Notification.markAllAsRead(userId);
+      if (!success) {
+        return sendResponse(res, 404, { error: 'No notifications found for this user' });
+      }
+      
+      return sendResponse(res, 200, { message: 'All notifications marked as read' });
+    } catch (error) {
+      console.error('Error marking all notifications as read:', error);
+      return sendResponse(res, 500, { error: 'Internal server error' });
     }
   },
 
@@ -151,16 +160,13 @@ export const notificationController = {
     try {
       const success = await Notification.delete(id);
       if (!success) {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Notification not found' }));
+        return sendResponse(res, 404, { error: 'Notification not found' });
       }
       
-      res.writeHead(204);
-      res.end();
+      return sendResponse(res, 204);
     } catch (error) {
       console.error('Error deleting notification:', error);
-      res.writeHead(500, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ error: 'Internal server error' }));
+      return sendResponse(res, 500, { error: 'Internal server error' });
     }
   }
 };

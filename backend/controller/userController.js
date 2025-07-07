@@ -1,7 +1,6 @@
 import { User } from "../models/entities/user.js";
 import { Profile } from "../models/entities/profile.js";
 
-// Validador de dados do usuário
 const validateUserData = (data, isUpdate = false) => {
   const errors = [];
   
