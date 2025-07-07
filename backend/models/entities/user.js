@@ -47,7 +47,15 @@ export class User {
 
   static async create(userData) {
     const users = await this.getAll();
-    const user = new User(userData.name, userData.email, userData.password, userData.role);
+
+    const role = (() => {
+      const email = userData.email.toLowerCase();
+      if (email.endsWith('@admin.com')) return 'Admin';
+      if (email.endsWith('@professor.com')) return 'Professor';
+      return 'CommunityMember';
+    })();
+
+    const user = new User(userData.name, userData.email, userData.password, role);
     users.push(user);
     await this.saveAll(users);
     return user;

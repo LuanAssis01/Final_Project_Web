@@ -51,10 +51,8 @@ export const userController = {
         return res.end(JSON.stringify({ error: 'User not found' }));
       }
       
-      // Busca o perfil associado
       const profile = await Profile.findByUserId(id);
       
-      // Remove a senha e adiciona o perfil
       const { password, ...userWithoutPassword } = user;
       const response = { ...userWithoutPassword, profile };
       
@@ -81,14 +79,12 @@ export const userController = {
           return res.end(JSON.stringify({ errors: validationErrors }));
         }
 
-        // Verifica se email já existe
         const existingUser = await User.findByEmail(data.email);
         if (existingUser) {
           res.writeHead(409, { 'Content-Type': 'application/json' });
           return res.end(JSON.stringify({ error: 'Email already in use' }));
         }
 
-        // Set default role if not provided
         if (!data.role) {
           data.role = 'USER';
         }
