@@ -2,39 +2,35 @@ import { notificationController } from '../controller/notificationController.js'
 
 export function notificationRouter(req, res) {
   const urlParts = req.url.split('/').filter(part => part !== '');
-  const id = urlParts[1];
-  const action = urlParts[2]; // 'read'
+  const [_, resource, param1, param2] = urlParts;
 
   try {
-    if (req.method === 'GET') {
-      if (urlParts.length === 1 && !id) {
-        return notificationController.getAll(req, res);
-      }
-      if (id && urlParts.length === 2) {
-        return notificationController.getById(req, res, id);
-      }
-      if (urlParts[0] === 'user' && id) {
-        return notificationController.getByUserId(req, res, id);
-      }
+    if (req.method === 'GET' && resource === 'notifications' && !param1) {
+      return notificationController.getAll(req, res);
     }
 
-    if (req.method === 'POST') {
-      if (urlParts.length === 1) {
-        return notificationController.create(req, res);
-      }
+    if (req.method === 'GET' && resource === 'notifications' && param1 && !param2) {
+      return notificationController.getById(req, res, param1);
     }
 
-    if (req.method === 'PUT') {
-      if (id && urlParts.length === 2) {
-        return notificationController.update(req, res, id);
-      }
-      if (id && action === 'read') {
-        return notificationController.markAsRead(req, res, id);
-      }
+    if (req.method === 'GET' && resource === 'notifications' && param1 === 'user' && param2) {
+      return notificationController.getByUserId(req, res, param2);
     }
 
-    if (req.method === 'DELETE' && id && urlParts.length === 2) {
-      return notificationController.delete(req, res, id);
+    if (req.method === 'POST' && resource === 'notifications' && !param1) {
+      return notificationController.create(req, res);
+    }
+
+    if (req.method === 'PUT' && resource === 'notifications' && param1 && !param2) {
+      return notificationController.update(req, res, param1);
+    }
+
+    if (req.method === 'PUT' && resource === 'notifications' && param1 && param2 === 'read') {
+      return notificationController.markAsRead(req, res, param1);
+    }
+
+    if (req.method === 'DELETE' && resource === 'notifications' && param1 && !param2) {
+      return notificationController.delete(req, res, param1);
     }
 
     res.writeHead(404, { 'Content-Type': 'application/json' });

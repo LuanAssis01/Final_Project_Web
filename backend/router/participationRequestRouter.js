@@ -2,45 +2,40 @@ import { participationRequestController } from '../controller/participationReque
 
 export function participationRequestRouter(req, res) {
   const urlParts = req.url.split('/').filter(part => part !== '');
-  const id = urlParts[1];
-  const action = urlParts[2]; // 'approve' ou 'reject'
-  const projectId = urlParts[3]; // Para rotas de projeto
+  const [_, resource, param1, param2] = urlParts;
 
   try {
-    if (req.method === 'GET') {
-      if (urlParts.length === 1 && !id) {
-        return participationRequestController.getAll(req, res);
-      }
-      if (id && urlParts.length === 2) {
-        return participationRequestController.getById(req, res, id);
-      }
-      if (urlParts[0] === 'project' && projectId) {
-        return participationRequestController.getByProjectId(req, res, projectId);
-      }
+    if (req.method === 'GET' && resource === 'requests' && !param1) {
+      return participationRequestController.getAll(req, res);
     }
 
-    if (req.method === 'POST') {
-      if (urlParts.length === 1) {
-        return participationRequestController.create(req, res);
-      }
+    if (req.method === 'GET' && resource === 'requests' && param1 && !param2) {
+      return participationRequestController.getById(req, res, param1);
     }
 
-    if (req.method === 'PUT') {
-      if (id && urlParts.length === 2) {
-        return participationRequestController.update(req, res, id);
-      }
-      if (id && action) {
-        return participationRequestController.changeStatus(
-          req, 
-          res, 
-          id, 
-          action.toUpperCase()
-        );
-      }
+    if (req.method === 'GET' && resource === 'requests' && param1 === 'project' && param2) {
+      return participationRequestController.getByProjectId(req, res, param2);
     }
 
-    if (req.method === 'DELETE' && id && urlParts.length === 2) {
-      return participationRequestController.delete(req, res, id);
+    if (req.method === 'POST' && resource === 'requests' && !param1) {
+      return participationRequestController.create(req, res);
+    }
+
+    if (req.method === 'PUT' && resource === 'requests' && param1 && !param2) {
+      return participationRequestController.update(req, res, param1);
+    }
+
+    if (req.method === 'PUT' && resource === 'requests' && param1 && param2) {
+      return participationRequestController.changeStatus(
+        req,
+        res,
+        param1,
+        param2.toUpperCase()
+      );
+    }
+
+    if (req.method === 'DELETE' && resource === 'requests' && param1 && !param2) {
+      return participationRequestController.delete(req, res, param1);
     }
 
     res.writeHead(404, { 'Content-Type': 'application/json' });

@@ -4,7 +4,7 @@ import { ImpactMetric } from '../models/entities/impactMetric.js';
 const sendResponse = (res, statusCode, data = null, headers = {}) => {
   const defaultHeaders = { 'Content-Type': 'application/json' };
   const responseHeaders = { ...defaultHeaders, ...headers };
-  
+
   res.writeHead(statusCode, responseHeaders);
   if (data) {
     res.end(JSON.stringify(data));
@@ -30,7 +30,7 @@ const parseRequestBody = (req) => {
 
 const validateProjectData = (data, isUpdate = false) => {
   const errors = [];
-  
+
   if (!isUpdate) {
     if (!data.title) errors.push('title is required');
     if (!data.description) errors.push('description is required');
@@ -41,7 +41,7 @@ const validateProjectData = (data, isUpdate = false) => {
   if (data.title && data.title.length > 100) {
     errors.push('title must be less than 100 characters');
   }
-  
+
   if (data.description && data.description.length > 2000) {
     errors.push('description must be less than 2000 characters');
   }
@@ -52,17 +52,17 @@ const validateProjectData = (data, isUpdate = false) => {
 export const projectController = {
   async getAll(req, res) {
     try {
-      const { status } = req.query;
-      let projects = await Project.getAll();
-      
-      if (status) {
-        projects = projects.filter(p => p.status === status.toUpperCase());
-      }
-      
-      sendResponse(res, 200, projects);
+      const statusFilter = req.query?.status; 
+      const projects = statusFilter
+        ? await Project.findByStatus(statusFilter)
+        : await Project.getAll();
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(projects));
     } catch (error) {
       console.error('Error getting projects:', error);
-      sendResponse(res, 500, { error: 'Internal server error' });
+      res.writeHead(500);
+      res.end('Erro interno ao buscar projetos');
     }
   },
 
@@ -72,7 +72,7 @@ export const projectController = {
       if (!project) {
         return sendResponse(res, 404, { error: 'Project not found' });
       }
-      
+
       sendResponse(res, 200, project);
     } catch (error) {
       console.error('Error getting project:', error);
@@ -84,7 +84,7 @@ export const projectController = {
     try {
       const data = await parseRequestBody(req);
       const validationErrors = validateProjectData(data);
-      
+
       if (validationErrors) {
         return sendResponse(res, 400, { errors: validationErrors });
       }
@@ -96,7 +96,7 @@ export const projectController = {
       };
 
       const project = await Project.create(projectData);
-      
+
       sendResponse(res, 201, project, {
         'Location': `/projects/${project.id}`
       });
@@ -114,7 +114,7 @@ export const projectController = {
     try {
       const data = await parseRequestBody(req);
       const validationErrors = validateProjectData(data, true);
-      
+
       if (validationErrors) {
         return sendResponse(res, 400, { errors: validationErrors });
       }
@@ -127,7 +127,7 @@ export const projectController = {
       if (!updatedProject) {
         return sendResponse(res, 404, { error: 'Project not found' });
       }
-      
+
       sendResponse(res, 200, updatedProject);
     } catch (error) {
       if (error.message === 'Invalid JSON format') {
@@ -145,7 +145,7 @@ export const projectController = {
       if (!success) {
         return sendResponse(res, 404, { error: 'Project not found' });
       }
-      
+
       sendResponse(res, 204);
     } catch (error) {
       console.error('Error deleting project:', error);

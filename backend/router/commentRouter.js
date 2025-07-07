@@ -1,47 +1,43 @@
+// router/commentRouter.js
 import { commentController } from '../controller/commentController.js';
 
 export function commentRouter(req, res) {
-  const urlParts = req.url.split('/').filter(part => part !== '');
-  const id = urlParts[1];
-  const action = urlParts[2];
-  const projectId = urlParts[3]; 
+  const urlParts = req.url.split('/').filter(p => p !== '');
+  const [_, resource, param1, param2] = urlParts;
 
   try {
-    if (req.method === 'GET') {
-      if (urlParts.length === 1 && !id) {
-        return commentController.getAll(req, res);
-      }
-      if (id && urlParts.length === 2) {
-        return commentController.getById(req, res, id);
-      }
-      if (urlParts[0] === 'project' && projectId) {
-        if (urlParts[2] === 'count') {
-          return commentController.getCommentCount(req, res, projectId);
-        }
-      }
+    if (req.method === 'POST' && resource === 'comments' && !param1) {
+      return commentController.create(req, res);
     }
 
-    if (req.method === 'POST') {
-      if (urlParts.length === 1) {
-        return commentController.create(req, res);
-      }
-      if (id && action === 'reply') {
-        return commentController.addReply(req, res, id);
-      }
+    if (req.method === 'GET' && resource === 'comments' && !param1) {
+      return commentController.getAll(req, res);
     }
 
-    if (req.method === 'PUT') {
-      if (id && urlParts.length === 2) {
-        return commentController.update(req, res, id);
-      }
-      if (id && action === 'like') {
-        const userId = urlParts[3]; // /comments/:id/like/:userId
-        return commentController.toggleLike(req, res, id, userId);
-      }
+    if (req.method === 'GET' && resource === 'comments' && param1 && !param2) {
+      return commentController.getById(req, res, param1);
     }
 
-    if (req.method === 'DELETE' && id && urlParts.length === 2) {
-      return commentController.delete(req, res, id);
+    if (req.method === 'PUT' && resource === 'comments' && param1 && !param2) {
+      return commentController.update(req, res, param1);
+    }
+
+    if (req.method === 'DELETE' && resource === 'comments' && param1 && !param2) {
+      return commentController.delete(req, res, param1);
+    }
+
+    if (req.method === 'GET' && resource === 'comments' && param1 === 'project' && param2) {
+      return commentController.getByProjectId(req, res, param2);
+    }
+
+    if (req.method === 'POST' && resource === 'comments' && param2 === 'reply') {
+      return commentController.addReply(req, res, param1);
+    }
+
+    if (req.method === 'PUT' && resource === 'comments' && param2 === 'like') {
+      const url = new URL(req.url, `http://${req.headers.host}`);
+      const userId = url.searchParams.get('userId');
+      return commentController.toggleLike(req, res, param1, userId);
     }
 
     res.writeHead(404, { 'Content-Type': 'application/json' });

@@ -2,34 +2,31 @@ import { impactMetricController } from '../controller/impactMetricController.js'
 
 export function impactMetricRouter(req, res) {
   const urlParts = req.url.split('/').filter(part => part !== '');
-  const id = urlParts[1];
-  const projectId = urlParts[3]; 
+  const [_, resource, param1, param2] = urlParts;
 
   try {
-    if (req.method === 'GET') {
-      if (urlParts.length === 1 && !id) {
-        return impactMetricController.getAll(req, res);
-      }
-      if (id && urlParts.length === 2) {
-        return impactMetricController.getById(req, res, id);
-      }
-      if (urlParts[0] === 'project' && projectId) {
-        return impactMetricController.getMetrics(req, res, projectId);
-      }
+    if (req.method === 'GET' && resource === 'metrics' && !param1) {
+      return impactMetricController.getAll(req, res);
     }
 
-    if (req.method === 'POST') {
-      if (urlParts.length === 1) {
-        return impactMetricController.create(req, res);
-      }
+    if (req.method === 'GET' && resource === 'metrics' && param1 && !param2) {
+      return impactMetricController.getById(req, res, param1);
     }
 
-    if (req.method === 'PUT' && id && urlParts.length === 2) {
-      return impactMetricController.update(req, res, id);
+    if (req.method === 'GET' && resource === 'metrics' && param1 === 'project' && param2) {
+      return impactMetricController.getMetrics(req, res, param2);
     }
 
-    if (req.method === 'DELETE' && id && urlParts.length === 2) {
-      return impactMetricController.delete(req, res, id);
+    if (req.method === 'POST' && resource === 'metrics' && !param1) {
+      return impactMetricController.create(req, res);
+    }
+
+    if (req.method === 'PUT' && resource === 'metrics' && param1 && !param2) {
+      return impactMetricController.update(req, res, param1);
+    }
+
+    if (req.method === 'DELETE' && resource === 'metrics' && param1 && !param2) {
+      return impactMetricController.delete(req, res, param1);
     }
 
     res.writeHead(404, { 'Content-Type': 'application/json' });

@@ -61,5 +61,91 @@ export const commentController = {
     });
   },
 
-  // ... outros métodos com o mesmo padrão de melhoria
+  async update(req, res, id) {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    
+    req.on('end', async () => {
+      try {
+        const data = JSON.parse(body);
+        const updatedComment = await Comment.update(id, data);
+        if (!updatedComment) {
+          res.writeHead(404);
+          return res.end('Comment not found');
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(updatedComment));
+      } catch (error) {
+        console.error('Error updating comment:', error);
+        res.writeHead(500);
+        res.end('Internal server error');
+      }
+    });
+  },
+
+  async delete(req, res, id) {
+    try {
+      const success = await Comment.delete(id);
+      if (!success) {
+        res.writeHead(404);
+        return res.end('Comment not found');
+      }
+      res.writeHead(204);
+      res.end();
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+      res.writeHead(500);
+      res.end('Internal server error');
+    }
+  },
+
+  async getByProjectId(req, res, projectId) {
+    try {
+      const comments = await Comment.findByProjectId(projectId);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(comments));
+    } catch (error) {
+      console.error('Error getting comments by projectId:', error);
+      res.writeHead(500);
+      res.end('Internal server error');
+    }
+  },
+
+  async addReply(req, res, commentId) {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+
+    req.on('end', async () => {
+      try {
+        const replyData = JSON.parse(body);
+        const reply = await Comment.addReply(commentId, replyData);
+        if (!reply) {
+          res.writeHead(404);
+          return res.end('Comment not found');
+        }
+        res.writeHead(201, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify(reply));
+      } catch (error) {
+        console.error('Error adding reply:', error);
+        res.writeHead(500);
+        res.end('Internal server error');
+      }
+    });
+  },
+
+  async toggleLike(req, res, commentId, userId) {
+    try {
+      const updatedComment = await Comment.toggleLike(commentId, userId);
+      if (!updatedComment) {
+        res.writeHead(404);
+        return res.end('Comment not found');
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(updatedComment));
+    } catch (error) {
+      console.error('Error toggling like:', error);
+      res.writeHead(500);
+      res.end('Internal server error');
+    }
+  }
 };
