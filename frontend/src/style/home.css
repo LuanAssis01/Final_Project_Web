@@ -11,6 +11,10 @@ header {
     height: 40px;
 }
 
+.active-nav {
+    color: var(--magenta-hover);
+}
+
 nav {
     margin-left: auto;
 }
@@ -34,14 +38,18 @@ nav ul li a:hover {
 
 }
 
-.btn-entrar {
+.btn {
     background-color: var(--magenta);
-    color: #ffffff;
+    color: #fff;
     padding: 1rem 2rem;
     text-decoration: none;
     border-radius: 1.2rem;
-    margin-left: 7rem;
     font-weight: 600;
+}
+
+.btn-entrar {
+    margin-left: 7rem;
+    color: #fff;
 }
 
 .btn-entrar:hover {
@@ -211,4 +219,109 @@ footer p {
     text-decoration: none;
     color: #6B7582;
     font-size: 1.6rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  padding: 2rem 1rem;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu .close-menu {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  display: block;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+/* Estilo do menu lateral */
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  margin: 2rem 2rem;
+  color: #fff;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.6rem;
+}
+
+/*Responsividade*/
+
+/* Celulares em geral */
+@media (max-width: 768px) {
+  .logo img {
+    height: 25px;
+  }
+  .footer-links {
+    gap: 4rem;
+  }
+  .projetos-destaque {
+    padding: 8rem 8rem;
+  }
+  nav {
+    display: none;
+  }
+  .hero {
+    padding: 8rem 3rem;
+  }
+  .hero-img img {
+    height: auto;
+    min-height: 50rem;
+  }
+  .hero-text {
+    padding: 2rem;
+  }
+  .hero-text h1 {
+    font-size: 4rem;
+  }
+  .hero-text p {
+    margin-bottom: 2rem;
+  }
+  .como-funciona {
+    padding: 5.7rem 8rem;
+  }
+  nav,
+  .btn-entrar {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+}
+
+/* Tablets (768px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .projetos-destaque {
+    padding: 8rem 8rem;
+  }
+  .footer-links {
+    gap: 4rem;
+  }
 }
