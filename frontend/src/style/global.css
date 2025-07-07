@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+:root {
+    font-family: "Montserrat", sans-serif;
+
+    --magenta: #71034a;
+    --magenta-hover: #5a023c;
+
+    --verdin: #afd5aa;
+    --verdin-hover: #91b88b;
+
+    --azul-petroleo: #073e5a;
+    --azul-petroleo-hover: #052e44;
+
+    --azul-tiffany: #10aaac;
+    --azul-tiffany-hover: #0e8c8d;
+
+    --fumaça: #f0f2ef;
+    --fumaça-hover: #d9dbd8;
+}

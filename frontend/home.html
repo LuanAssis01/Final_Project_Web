@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./src/style/global.css" />
+    <link rel="stylesheet" href="./src/style/home.css" />
+    <title>Home</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="./src/assets/icons/Logo.png" alt="" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="./home.html" data-page="home" class="home">Home</a></li>
+          <li>
+            <a
+              href="./src/pages/public/projetos.html"
+              data-page="projetos"
+              class="projetos"
+              >Projetos</a
+            >
+          </li>
+          <li>
+            <a
+              href="./src/pages/public/contato.html"
+              data-page="contato"
+              class="contato"
+              >Contato</a
+            >
+          </li>
+          <li>
+            <a
+              href="./src/pages/public/sobre.html"
+              data-page="sobre"
+              class="sobre"
+              >Sobre</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <a href="./src/pages/public/login.html" class="btn-entrar" data-page="login">Entrar</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-img">
+          <img
+            src="./src/assets/images/campus2.png"
+            alt="Imagem do campus"
+            data-hero
+          />
+          <a href="./src/pages/public/projetos.html" class="btn-explorar" data-page="projetos"
+            >Explorar projetos</a
+          >
+          <div class="hero-text">
+            <h1>Conecte, colabore e crie impacto</h1>
+            <p>
+              O Unifesspa+ é o seu centro para projetos de extensão
+              universitária. Encontre oportunidades, junte-se a equipes e faça a
+              diferença na sua comunidade.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="projetos-destaque">
+        <h2>Projetos em destaque</h2>
+        <div class="projetos-grid">
+          <article>
+            <img src="./src/assets/images/projeto1.png" alt="Saúde PET" />
+            <div>
+              <h3>Saúde PET</h3>
+              <p>Melhorando os resultados de saúde em comunidades carentes.</p>
+            </div>
+          </article>
+          <article>
+            <img src="./src/assets/images/projeto2.png" alt="PID" />
+            <div>
+              <h3>PID</h3>
+              <p>Programa de inclusão digital.</p>
+            </div>
+          </article>
+          <article>
+            <img
+              src="./src/assets/images/projeto1.png"
+              alt="Iniciativa de Saúde Comunitária"
+            />
+            <div>
+              <h3>Iniciativa de Saúde Comunitária</h3>
+              <p>Melhorando os resultados de saúde em comunidades carentes.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <aside class="como-funciona">
+        <h2>Como funciona?</h2>
+        <p>Para se inscrever em um projeto de extensão, basta se:</p>
+        <ol>
+          <li>Cadastrar</li>
+          <li>Encontrar um projeto</li>
+          <li>Participar</li>
+        </ol>
+      </aside>
+    </main>
+    <footer>
+      <div class="footer-links">
+        <a href="/sobre" data-page="sobre">Sobre</a>
+        <a href="/contato" data-page="contato">Contato</a>
+        <a href="/politica" data-page="politica">Política de Privacidade</a>
+        <a href="/termos" data-page="termos">Termos de Serviço</a>
+      </div>
+      <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
+    </footer>
+  </body>
+</html>
