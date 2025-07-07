@@ -1,16 +1,23 @@
 [
   {
-    "id": "cae2ec00-2c52-49ae-89da-9a2a26176c1d",
-    "name": "João Silva",
-    "email": "joao@email.com",
-    "password": "123456",
-    "role": "CommunityMember"
-  },
-  {
-    "id": "bb3cf550-b556-4773-a167-e0c304ec2ff7",
+    "id": "011ceeaf-2d1e-4123-ac0f-8cdf56a7ba75",
     "name": "luan",
-    "email": "luan@email.com",
+    "email": "luan@admin.com",
     "password": "122414",
     "role": "Admin"
+  },
+  {
+    "id": "2ddb5b90-3343-42b4-a1e8-c8910078c328",
+    "name": "ricardo",
+    "email": "ricardo@professor.com",
+    "password": "122414",
+    "role": "Professor"
+  },
+  {
+    "id": "a448f224-aa48-479d-a70c-680eaee114e6",
+    "name": "Luan Assis",
+    "email": "luanassis@gmail.com",
+    "password": "123456",
+    "role": "CommunityMember"
   }
 ]

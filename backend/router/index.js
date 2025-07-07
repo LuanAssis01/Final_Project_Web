@@ -9,6 +9,8 @@ import { participationRequestRouter } from './participationRequestRouter.js';
 import { notificationRouter } from './notificationRouter.js';
 import { filterRouter } from './filterRouter.js';
 import { authMiddleware } from '../auth/authMiddleware.js';
+import { authRouter } from './authRouter.js';
+
 
 export function mainRouter(req, res) {
   if (req.url.startsWith('/api/users')) return userRouter(req, res);
@@ -70,6 +72,8 @@ export function mainRouter(req, res) {
   }
 
   if (req.url.startsWith('/api/filter')) return filterRouter(req, res);
+
+  if (req.url.startsWith('/api/login')) return authRouter(req, res);
 
   res.writeHead(404);
   res.end('Rota não encontrada');
