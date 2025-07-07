@@ -2,14 +2,14 @@
 import { Comment } from '../models/entities/comment.js';
 
 export const commentController = {
-  getAll(req, res) {
-    const comments = Comment.getAll();
+  async getAll(req, res) {
+    const comments = await Comment.getAll();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(comments));
   },
 
-  getById(req, res, id) {
-    const comment = Comment.findById(id);
+  async getById(req, res, id) {
+    const comment = await Comment.findById(id);
     if (!comment) {
       res.writeHead(404);
       return res.end('Comentário não encontrado');
@@ -18,23 +18,23 @@ export const commentController = {
     res.end(JSON.stringify(comment));
   },
 
-  create(req, res) {
+  async create(req, res) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const comment = Comment.create(data);
+      const comment = await Comment.create(data);
       res.writeHead(201, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify(comment));
     });
   },
 
-  update(req, res, id) {
+  async update(req, res, id) {
     let body = '';
     req.on('data', chunk => body += chunk);
-    req.on('end', () => {
+    req.on('end', async () => {
       const data = JSON.parse(body);
-      const updated = Comment.update(id, data);
+      const updated = await Comment.update(id, data);
       if (!updated) {
         res.writeHead(404);
         return res.end('Comentário não encontrado');
@@ -44,8 +44,8 @@ export const commentController = {
     });
   },
 
-  delete(req, res, id) {
-    const success = Comment.delete(id);
+  async delete(req, res, id) {
+    const success = await Comment.delete(id);
     res.writeHead(success ? 204 : 404);
     res.end(success ? undefined : 'Comentário não encontrado');
   }

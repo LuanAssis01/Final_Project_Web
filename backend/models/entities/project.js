@@ -1,15 +1,21 @@
 import { randomUUID } from 'crypto';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs';
+import fs from 'fs/promises'; 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const DATA_PATH = join(__dirname, '../../data/users.json');
+const DATA_PATH = join(__dirname, '../../data/projects.json');
 
-if (!fs.existsSync(DATA_PATH)) {
-  fs.writeFileSync(DATA_PATH, '[]', 'utf-8');
-}
+const ensureFileExists = async () => {
+  try {
+    await fs.access(DATA_PATH);
+  } catch {
+    await fs.writeFile(DATA_PATH, '[]', 'utf-8');
+  }
+};
+
+await ensureFileExists();
 
 export class Project {
   constructor(title, description, thematicArea, category, startDate, endDate, status = 'ACTIVE') {
@@ -28,22 +34,26 @@ export class Project {
     this.history = [];
   }
 
-  static getAll() {
-    if (!fs.existsSync(DATA_PATH)) return [];
-    const data = fs.readFileSync(DATA_PATH);
-    return JSON.parse(data);
+  static async getAll() {
+    try {
+      const data = await fs.readFile(DATA_PATH, 'utf-8');
+      return JSON.parse(data);
+    } catch (err) {
+      return [];
+    }
   }
 
-  static saveAll(projects) {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(projects, null, 2));
+  static async saveAll(projects) {
+    await fs.writeFile(DATA_PATH, JSON.stringify(projects, null, 2));
   }
 
-  static findById(id) {
-    return this.getAll().find(p => p.id === id);
+  static async findById(id) {
+    const projects = await this.getAll();
+    return projects.find(p => p.id === id);
   }
 
-  static create(projectData) {
-    const projects = this.getAll();
+  static async create(projectData) {
+    const projects = await this.getAll();
     const newProject = new Project(
       projectData.title,
       projectData.description,
@@ -54,25 +64,24 @@ export class Project {
       projectData.status
     );
     projects.push(newProject);
-    this.saveAll(projects);
+    await this.saveAll(projects);
     return newProject;
   }
 
-  static update(id, updatedData) {
-    const projects = this.getAll();
+  static async update(id, updatedData) {
+    const projects = await this.getAll();
     const index = projects.findIndex(p => p.id === id);
     if (index === -1) return null;
     projects[index] = { ...projects[index], ...updatedData };
-    this.saveAll(projects);
+    await this.saveAll(projects); 
     return projects[index];
   }
 
-  static delete(id) {
-    let projects = this.getAll();
-    const originalLength = projects.length;
-    projects = projects.filter(p => p.id !== id);
-    if (projects.length === originalLength) return false;
-    this.saveAll(projects);
+  static async delete(id) {
+    const projects = await this.getAll();
+    const filtered = projects.filter(p => p.id !== id); 
+    if (filtered.length === projects.length) return false;
+    await this.saveAll(filtered);
     return true;
   }
 }

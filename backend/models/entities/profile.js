@@ -1,15 +1,21 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs';
+import fs from 'fs/promises'; 
 import { randomUUID } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const DATA_PATH = join(__dirname, '../../data/profiles.json');
 
-if (!fs.existsSync(DATA_PATH)) {
-  fs.writeFileSync(DATA_PATH, '[]', 'utf-8');
-}
+const ensureFileExists = async () => {
+  try {
+    await fs.access(DATA_PATH);
+  } catch {
+    await fs.writeFile(DATA_PATH, '[]', 'utf-8');
+  }
+};
+
+await ensureFileExists();
 
 export class Profile {
   constructor(userId, bio, institution, location) {
@@ -20,47 +26,68 @@ export class Profile {
     this.location = location;
   }
 
-  static getAll() {
-    if (!fs.existsSync(DATA_PATH)) return [];
-    const data = fs.readFileSync(DATA_PATH);
-    return JSON.parse(data);
+  static async getAll() {
+    try {
+      const data = await fs.readFile(DATA_PATH, 'utf-8');
+      return JSON.parse(data);
+    } catch (err) {
+      return [];
+    }
   }
 
-  static saveAll(profiles) {
-    fs.writeFileSync(DATA_PATH, JSON.stringify(profiles, null, 2));
+  static async saveAll(profiles) {
+    await fs.writeFile(DATA_PATH, JSON.stringify(profiles, null, 2));
   }
 
-  static findByUserId(userId) {
-    return this.getAll().find(profile => profile.userId === userId);
+  static async findByUserId(userId) {
+    const profiles = await this.getAll();
+    return profiles.find(profile => profile.userId === userId);
   }
 
-  static findById(id) {
-    return this.getAll().find(profile => profile.id === id);
+  static async findById(id) {
+    const profiles = await this.getAll();
+    return profiles.find(profile => profile.id === id);
   }
 
-  static create(data) {
-    const profiles = this.getAll();
-    const profile = new Profile(data.userId, data.bio, data.institution, data.location);
+  static async create(data) {
+    const profiles = await this.getAll();
+    const profile = new Profile(
+      data.userId,
+      data.bio,
+      data.institution,
+      data.location
+    );
     profiles.push(profile);
-    this.saveAll(profiles);
+    await this.saveAll(profiles);
     return profile;
   }
 
-  static update(id, updatedData) {
-    const profiles = this.getAll();
+  static async update(id, updatedData) {
+    const profiles = await this.getAll();
     const index = profiles.findIndex(p => p.id === id);
     if (index === -1) return null;
-    profiles[index] = { ...profiles[index], ...updatedData };
-    this.saveAll(profiles);
-    return profiles[index];
+    
+    const updatedProfile = { 
+      ...profiles[index], 
+      ...updatedData,
+      id: profiles[index].id // Garantindo que o ID não seja alterado
+    };
+    
+    profiles[index] = updatedProfile;
+    await this.saveAll(profiles);
+    return updatedProfile;
   }
 
-  static delete(id) {
-    let profiles = this.getAll();
+  static async delete(id) {
+    const profiles = await this.getAll();
     const originalLength = profiles.length;
-    profiles = profiles.filter(p => p.id !== id);
-    if (profiles.length === originalLength) return false;
-    this.saveAll(profiles);
+    const filteredProfiles = profiles.filter(p => p.id !== id);
+    
+    if (filteredProfiles.length === originalLength) {
+      return false;
+    }
+    
+    await this.saveAll(filteredProfiles);
     return true;
   }
 }
