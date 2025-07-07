@@ -1,0 +1,206 @@
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  color: #121417;
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.logo img {
+  height: 30px;
+  margin-block: 2rem;
+}
+
+.sidebar {
+  width: 25rem;
+  background: #fff;
+  border-right: 1px solid #dee0e3;
+  padding: 2rem 3rem;
+  height: 100vh;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.active {
+  background-color: #f2f2f5;
+  border-radius: 1rem;
+  font-weight: 900;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
+}
+
+.sidebar a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #121417;
+  font-size: 1.5rem;
+}
+
+.dashboard {
+  width: 100%;
+  padding: 4rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard p {
+  color: #6b7280;
+  margin-bottom: 3rem;
+  font-size: 1.5rem;
+}
+
+header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+header p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.metrics {
+  gap: 1rem;
+  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.metrics div {
+  padding: 2rem 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  flex: 1;
+  font-weight: normal;
+  font-size: 1.4rem;
+}
+
+.metrics strong {
+  display: block;
+  font-size: 2rem;
+  margin-top: 1rem;
+}
+
+.approvals {
+  margin-bottom: 2rem;
+}
+
+.approvals table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border: 1px solid #dee0e3;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.approvals th,
+.approvals td {
+  padding: 1rem;
+  text-align: left;
+  font-size: 1.5rem;
+  color: #333;
+  height: 5rem;
+}
+
+.approvals thead th {
+  font-weight: 600;
+  border-bottom: 1px solid #dee0e3;
+}
+
+.approvals tbody tr:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.approvals tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.badge {
+  background-color: #f1f1f1;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.approvals a {
+  color: #6B7582;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.approvals a:hover {
+  text-decoration: underline;
+}
+
+.activity ul {
+  list-style: none;
+  padding: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.activity li {
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.activity span {
+  display: block;
+  color: #888;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+footer {
+  display: flex;
+  flex: 1;
+  justify-content: end;
+  flex-direction: column;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #777;
+
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-around;
+  margin-block: 2rem;
+}
+
+.footer-links a,
+footer p {
+  text-decoration: none;
+  color: #6b7582;
+  font-size: 1.6rem;
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+
+    <link rel="stylesheet" href="../../style/global.css">
+    <link rel="stylesheet" href="../../style/projetos.css">
+    <title>Projetos</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../../assets/icons/Logo.png" alt="">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../../../home.html" data-page="home" class="home">Home</a></li>
+                <li><a href="projetos.html" data-page="projetos" class="projetos">Projetos</a></li>
+                <li><a href="contato.html" data-page="contato" class="contato">Contato</a></li>
+                <li><a href="sobre.html" data-page="sobre" class="sobre">Sobre</a></li>
+            </ul>
+        </nav>
+        <a href="./login.html" class="btn-entrar" data-page="login">Entrar</a>
+    </header>
+
+    <main>
+        <div class="wrapper">
+            <section class="pesquisa">
+                <h1>Projetos</h1>
+                <p>Explore projetos e iniciativas de extensão universitária em andamento.</p>
+                <div class="input-busca">
+                    <img src="../../assets/icons/lupa.png" alt="Imagem de uma lupa">
+                    <input type="text" name="pesquisar-projeto" id="pesquisar-projeto" placeholder="Pesquisar projetos...">
+                </div>
+            </section>
+
+            <section class="barra-pesquisa">
+                <select class="custom-select curso" name="curso">
+                    <option value="">Curso</option>
+                    <option value="engenharia-da-computacao">Engenharia da Computação</option>
+                    <option value="saude-coletiva">Saúde Coletiva</option>
+                    <option value="sistemas-de-informação">Sistemas de Informação</option>
+                </select>
+
+                <select class="custom-select status" name="status">
+                    <option value="">Status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="finalizado">Finalizado</option>
+                </select>
+
+                <select class="custom-select palavras-chave" name="palavras-chave">
+                    <option value="">Palavras-chave</option>
+                    <option value="tecnologia">#tecnologia</option>
+                    <option value="saude">#saude</option>
+                    <option value="inclusao">#inclusao</option>
+                    <option value="pet">#pet</option>
+                    <option value="comunitaria">#comunitaria</option>
+                </select>
+            </section>
+
+            <section class="projetos-grid">
+                <article>
+                    <img src="../../assets/images/projeto1.png" alt="Saúde PET">
+                    <div>
+                        <h3>Saúde PET</h3>
+                        <p>Melhorando os resultados de saúde em comunidades carentes.</p>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="../../assets/images/projeto2.png" alt="PID">
+                    <div>
+                        <h3>PID</h3>
+                        <p>Programa de inclusão digital.</p>
+                    </div>
+                </article>
+
+                <article>
+                    <img src="../../assets/images/projeto1.png" alt="Iniciativa de Saúde Comunitária">
+                    <div>
+                        <h3>Iniciativa de Saúde Comunitária</h3>
+                        <p>Melhorando os resultados de saúde em comunidades carentes.</p>
+                    </div>
+                </article>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="./sobre.html" data-page="sobre">Sobre</a>
+            <a href="contato.html" data-page="contato">Contato</a>
+            <a href="/politica" data-page="politica">Política de Privacidade</a>
+            <a href="/termos" data-page="termos">Termos de Serviço</a>
+        </div>
+        <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <script>
+        document.querySelectorAll('.custom-select').forEach(select => {
+            new Choices(select, {
+                searchEnabled: false,
+                itemSelectText: '',
+                shouldSort: false
+            });
+        });
+    </script>
+
+</body>
+
+</html>
