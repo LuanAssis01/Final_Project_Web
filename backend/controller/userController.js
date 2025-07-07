@@ -30,8 +30,6 @@ export const userController = {
   async getAll(req, res) {
     try {
       const users = await User.getAll();
-      
-      // Remove senhas dos resultados
       const usersWithoutPasswords = users.map(user => {
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword;

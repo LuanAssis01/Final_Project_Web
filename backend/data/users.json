@@ -1,23 +1,9 @@
 [
   {
-    "id": "7836c2f4-fcfa-4e1d-8463-a54ca67729a8",
-    "name": "Luan Assis",
-    "email": "luan@example.com",
-    "role": "Admin"
-  },
-  {
-    "id": "9bdc2045-f69a-40c4-9a8e-8beb0c5ef65a",
-    "title": "Oficina de Robótica Sustentável",
-    "description": "Projeto que ensina robótica com materiais recicláveis para alunos do ensino médio.",
-    "thematicArea": "Tecnologia",
-    "category": "Extensão",
-    "startDate": "2025-07-01",
-    "endDate": "2025-12-15",
-    "status": "Active",
-    "metrics": [],
-    "attachments": [],
-    "comments": [],
-    "requests": [],
-    "history": []
+    "id": "cae2ec00-2c52-49ae-89da-9a2a26176c1d",
+    "name": "João Silva",
+    "email": "joao@email.com",
+    "password": "123456",
+    "role": "CommunityMember"
   }
 ]

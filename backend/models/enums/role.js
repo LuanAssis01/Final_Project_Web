@@ -1,5 +1,5 @@
 const Role = {
-    COMMUNITYMEMBER: Symbol("Membro da Comunidade"),
+    ADMIN: Symbol("Administrador"),
     PROFESSOR: Symbol("Professor"),
-    ADMIN: Symbol("Administrador")
+    COMMUNITYMEMBER: Symbol("CommunityMember")
 };

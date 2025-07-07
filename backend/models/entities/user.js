@@ -1,11 +1,11 @@
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import fs from 'fs/promises'; 
+import fs from 'fs/promises';
 import { randomUUID } from 'crypto';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const DATA_PATH = join(__dirname, '../../data/user.json');
+const DATA_PATH = join(__dirname, '../../data/users.json');
 
 const ensureFileExists = async () => {
   try {
@@ -27,8 +27,13 @@ export class User {
   }
 
   static async getAll() {
-    const data = await fs.readFile(DATA_PATH, 'utf-8');
-    return JSON.parse(data);
+    try {
+      const data = await fs.readFile(DATA_PATH, 'utf-8');
+      return JSON.parse(data);
+    } catch (err) {
+      console.error('Erro ao ler usuários:', err);
+      return [];
+    }
   }
 
   static async saveAll(users) {
@@ -63,5 +68,10 @@ export class User {
     if (filtered.length === users.length) return false;
     await this.saveAll(filtered);
     return true;
+  }
+
+  static async findByEmail(email) {
+    const users = await this.getAll();
+    return users.find(user => user.email === email);
   }
 }

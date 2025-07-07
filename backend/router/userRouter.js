@@ -3,48 +3,58 @@ import { URL } from 'url';
 
 export function userRouter(req, res) {
   const urlParts = req.url.split('/').filter(part => part !== '');
-  const id = urlParts[1];
-  const action = urlParts[2]; // 'profile', 'notifications', etc.
 
   try {
     const parsedUrl = new URL(req.url, `http://${req.headers.host}`);
     const email = parsedUrl.searchParams.get('email');
 
+    // [GET] /api/users
     if (req.method === 'GET') {
-      if (urlParts.length === 1 && !id) {
-        if (email) {
-          return userController.getByEmail(req, res, email);
-        }
+      if (urlParts[0] === 'api' && urlParts[1] === 'users' && !urlParts[2]) {
+        if (email) return userController.getByEmail(req, res, email);
         return userController.getAll(req, res);
       }
-      if (id && urlParts.length === 2) {
+
+      // [GET] /api/users/:id
+      if (urlParts.length === 3 && urlParts[0] === 'api' && urlParts[1] === 'users') {
+        const id = urlParts[2];
         return userController.getById(req, res, id);
       }
-      if (id && action === 'profile') {
-        return userController.getProfile(req, res, id);
-      }
-      if (id && action === 'notifications') {
-        return userController.getNotifications(req, res, id);
+
+      // [GET] /api/users/:id/profile ou /:id/notifications
+      if (urlParts.length === 4 && urlParts[0] === 'api' && urlParts[1] === 'users') {
+        const id = urlParts[2];
+        const action = urlParts[3];
+        if (action === 'profile') return userController.getProfile(req, res, id);
+        if (action === 'notifications') return userController.getNotifications(req, res, id);
       }
     }
 
+    // [POST] /api/users
     if (req.method === 'POST') {
-      if (urlParts.length === 1) {
+      if (urlParts.length === 2 && urlParts[0] === 'api' && urlParts[1] === 'users') {
         return userController.create(req, res);
       }
     }
 
+    // [PUT] /api/users/:id ou /:id/password
     if (req.method === 'PUT') {
-      if (id && urlParts.length === 2) {
+      if (urlParts.length === 3 && urlParts[0] === 'api' && urlParts[1] === 'users') {
+        const id = urlParts[2];
         return userController.update(req, res, id);
       }
-      if (id && action === 'password') {
+      if (urlParts.length === 4 && urlParts[0] === 'api' && urlParts[1] === 'users' && urlParts[3] === 'password') {
+        const id = urlParts[2];
         return userController.changePassword(req, res, id);
       }
     }
 
-    if (req.method === 'DELETE' && id && urlParts.length === 2) {
-      return userController.delete(req, res, id);
+    // [DELETE] /api/users/:id
+    if (req.method === 'DELETE') {
+      if (urlParts.length === 3 && urlParts[0] === 'api' && urlParts[1] === 'users') {
+        const id = urlParts[2];
+        return userController.delete(req, res, id);
+      }
     }
 
     res.writeHead(404, { 'Content-Type': 'application/json' });
