@@ -1,175 +1,271 @@
 .login-container {
-    display: flex;
-    min-height: 100vh;
-    width: 100%;
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .logo-section {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-section img {
-    width: 100%;
-    max-width: 45rem;
+  width: 100%;
+  max-width: 45rem;
 }
 
-
 main {
-    flex: 1;
-    background-color: var(--azul-petroleo);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  flex: 1;
+  background-color: var(--azul-petroleo);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 header {
-    margin-bottom: 10rem;
+  margin-bottom: 10rem;
 }
 
 header h1 {
-    font-family: 'Montserrat', sans-serif;
-    color: #fff;
-    font-size: 4rem;
-    font-weight: 900;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  font-size: 4rem;
+  font-weight: 900;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .label-email label,
 .label-password label {
-    display: flex;
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-family: "Montserrat", sans-serif;
-    color: #fff;
-    gap: 1rem;
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  gap: 1rem;
 }
 
 .label-email input,
 .password-wrapper {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .label-email input,
 .password-wrapper input {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 form input {
-    width: 100%;
-    border-radius: 0.6rem;
-    border: 1px solid #ccc;
-    padding: 1.3rem;
-    min-width: 30rem;
+  width: 100%;
+  border-radius: 0.6rem;
+  border: 1px solid #ccc;
+  padding: 1.3rem;
+  min-width: 30rem;
 }
 
 .error-msg {
-    color: red;
-    font-size: 1.5rem;
-    visibility: hidden;
-    font-weight: 600;
+  color: red;
+  font-size: 1.5rem;
+  visibility: hidden;
+  font-weight: 600;
 }
 
 form input:focus {
-    border: 0.1rem solid var(--azul-petroleo);
-    
+  border: 0.1rem solid var(--azul-petroleo);
 }
 
 form input:invalid:not(:focus):not(:placeholder-shown) {
-    border: 1px solid red;
+  border: 1px solid red;
 }
 
-form input:invalid:not(:focus):not(:placeholder-shown)~.error-msg {
-    visibility: visible;
+form input:invalid:not(:focus):not(:placeholder-shown) ~ .error-msg {
+  visibility: visible;
 }
 
 .label-password {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .forgot {
-    font-size: 1.4rem;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
+  font-size: 1.4rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .forgot:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .password-wrapper {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 }
 
 .password-wrapper button {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: none;
-    background: transparent;
-    cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .password-wrapper img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .btn-primary {
-    width: 100%;
-    background: var(--azul-tiffany);
-    color: #fff;
-    border: none;
-    border-radius: 0.6rem;
-    padding: 1.6rem;
-    font-size: 1.7rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background .25s;
-    margin-top: 3.2rem;
-    margin-bottom: 3.2rem;
-    max-width: 23rem;
+  width: 100%;
+  background: var(--azul-tiffany);
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  padding: 1.6rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s;
+  margin-top: 3.2rem;
+  margin-bottom: 3.2rem;
+  max-width: 23rem;
 }
 
 .btn-primary:hover {
-    background: var(--azul-tiffany-hover);
+  background: var(--azul-tiffany-hover);
 }
 
 .signup {
-    display: flex;
-    font-size: 1.4rem;
-    gap: 0.5rem;
-    align-self: flex-start;
-    margin-top: 1rem;
+  display: flex;
+  font-size: 1.4rem;
+  gap: 0.5rem;
+  align-self: flex-start;
+  margin-top: 1rem;
 }
 
 .signup a {
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .signup {
-    color: #fff;
+  color: #fff;
 }
 
 .signup a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+/* Celulares em geral */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-section {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+    padding: 4rem 3rem;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  .btn-primary {
+    max-width: 100%;
+  }
+
+  .signup {
+    align-self: center;
+    text-align: center;
+    flex-direction: column;
+  }
+}
+
+/* Tablets (769px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .logo-section {
+    order: 2;
+    margin-top: 3rem;
+  }
+
+  .btn-primary {
+    max-width: 100%;
+  }
+
+  header h1 {
+    font-size: 3rem;
+  }
+}
+
+/* Laptops e notebooks (1025px a 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  form input {
+    height: 5rem;
+  }
+  .logo-section img {
+    max-width: 35rem;
+  }
+
+  header h1 {
+    font-size: 3.5rem;
+  }
+}
+
+/* Telas grandes e desktops full HD */
+@media (min-width: 1367px) {
+  form input {
+    width: 100%;
+    height: 6rem;
+  }
+
+  .btn-primary {
+    margin-top: 6rem;
+  }
+
+  header h1 {
+    font-size: 4rem;
+  }
+  .label-email label,
+  .label-password label {
+    font-size: 1.6rem;
+  }
+  .label-email input,
+  .password-wrapper input {
+    font-size: 1.6rem;
+  }
+  .signup {
+    font-size: 1.6rem;
+  }
+  .forgot {
+    font-size: 1.6rem;
+  }
+  .btn-primary {
+    font-size: 1.8rem;
+  }
 }
