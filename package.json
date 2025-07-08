@@ -1,20 +1,31 @@
 {
   "name": "final_project",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Projeto final de CRUD com JavaScript puro",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend/server.js",
+    "dev": "nodemon server.js",
+    "test": "echo \"No tests yet\" && exit 0"
   },
+  "keywords": [
+    "crud",
+    "javascript",
+    "sem-framework",
+    "api"
+  ],
+  "author": "Luan Assis",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuanAssis01/Final_Project_Web.git"
+    "url": "https://github.com/LuanAssis01/Final_Project_Web.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/LuanAssis01/Final_Project_Web/issues"
   },
   "homepage": "https://github.com/LuanAssis01/Final_Project_Web#readme",
-  "description": ""
+  "dependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
