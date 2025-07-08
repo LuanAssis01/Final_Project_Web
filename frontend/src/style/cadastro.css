@@ -150,3 +150,79 @@ form input:invalid:not(:focus):not(:placeholder-shown)~.error-msg {
 .btn-primary:hover {
     background: var(--azul-tiffany-hover);
 }
+
+/* Celulares em geral */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo-section {
+    display: none;
+  }
+
+  main {
+    width: 100%;
+    padding: 2rem 4rem;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  .signup {
+    align-self: center;
+    text-align: center;
+    flex-direction: column;
+  }
+}
+
+/* Tablets (769px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .logo-section {
+    order: 2;
+    margin-top: 3rem;
+  }
+
+  .btn-primary {
+    max-width: 100%;
+  }
+
+  header h1 {
+    font-size: 3rem;
+  }
+}
+
+/* Laptops e notebooks (1025px a 1366px) */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  form input {
+    height: 5rem;
+  }
+  .logo-section img {
+    max-width: 35rem;
+  }
+
+  header h1 {
+    font-size: 3.5rem;
+  }
+}
+
+/* Telas grandes e desktops full HD */
+@media (min-width: 1367px) {
+  form input {
+    height: 5.5rem;
+  }
+
+  .btn-primary {
+    margin-top: 6rem;
+  }
+
+  header h1 {
+    font-size: 4rem;
+  }
+}
