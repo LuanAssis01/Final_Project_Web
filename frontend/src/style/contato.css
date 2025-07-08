@@ -3,7 +3,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 5rem;
+    padding: 2rem 4rem;
     border-bottom: 1px solid #e5e8eb;
 }
 
@@ -260,6 +260,9 @@ footer p {
   .wrapper {
     padding: 4rem 2rem;
   }
+  main {
+    margin: 2.2rem;
+  }
   .btn-entrar {
     margin-left: 0;
     margin-top: 1rem;
@@ -296,31 +299,7 @@ footer p {
   .footer-links {
     gap: 4rem;
   }
-  .projetos-destaque {
-    padding: 8rem 8rem;
-  }
-  nav {
-    display: none;
-  }
-  .hero {
-    padding: 8rem 3rem;
-  }
-  .hero-img img {
-    height: auto;
-    min-height: 50rem;
-  }
-  .hero-text {
-    padding: 2rem;
-  }
-  .hero-text h1 {
-    font-size: 4rem;
-  }
-  .hero-text p {
-    margin-bottom: 2rem;
-  }
-  .como-funciona {
-    padding: 5.7rem 8rem;
-  }
+ 
   nav,
   .btn-entrar {
     display: none;
@@ -341,7 +320,9 @@ footer p {
   .info h1 {
     font-size: 2.8rem;
   }
-
+  main {
+    margin: 6rem;
+  }
   .footer-links {
     gap: 8rem;
   }
