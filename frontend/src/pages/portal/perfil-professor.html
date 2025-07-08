@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../style/global.css">
+    <link rel="stylesheet" href="../../style/perfil-professor.css">
+    <title>Perfil</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-profile">
+                <figure>
+                    <img src="../../assets/icons/perfilPerson2.png" alt="">
+                </figure>
+                <div class="info">
+                    <h3>Dra. Aline Farias</h3>
+                    <p>Professora de Engeharia da Computação</p>
+                </div>
+            </div>
+            <nav>
+                <a class="home" href="#">
+                    <div>
+                        <img src="../../assets/icons/ph_house.svg" alt="">
+                        <p>Home</p>
+                    </div>
+                </a>
+                <a class="projetos" href="#">
+                    <div>
+                        <img src="../../assets/icons/pasta1.png" alt="">
+                        <p>Projetos</p>
+                    </div>
+                </a>
+                <a class="perfil" href="#">
+                    <div>
+                        <img src="../../assets/icons/person1.png" alt="">
+                        <p>Perfil</p>
+                    </div>
+                </a>
+                <a class="config" href="#">
+                    <div>
+                        <img src="../../assets/icons/config.svg" alt="">
+                        <p>Configurações</p>
+                    </div>
+                </a>
+            </nav>
+        </div>
+
+        <main>
+            <div class="profile-header">
+                <h1>Perfil</h1>
+                <div class="profile-info">
+                    <div class="profile-image">
+                        <img src="../../assets/icons/perfilPerson2.png" alt="">
+                    </div>
+                    <div class="profile-text">
+                        <div>
+                            <h2>Dra. Aline Farias </h2>
+                            <p>Professora de Engenharia da Computação</p>
+                            <p>Entrou em 2021</p>
+                        </div>
+                        <div class="profile-btn">
+                            <button>Editar/Visualizar perfil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form>
+                <div class="label-name">
+                    <label for="name">Nome</label>
+                    <input type="text" name="name" id="name" placeholder="Dra. Aline Farias">
+                </div>
+                <div class="label-institution">
+                    <label for="institution">Instituição</label>
+                    <input type="text" name="institution" id="institution" 
+                    placeholder="UNIFESSPA - Universidade Federal do Sul e Sudeste do Pará">
+                </div>
+                <div class="label-position">
+                    <label for="position">Cargo (Docente ou Discente)</label>
+                    <input type="text" name="position" id="position" placeholder="Professora de Engenharia da Computação">
+                </div>
+                <div class="label-email">
+                    <label for="email">E-mail institucional</label>
+                    <input type="email" name="email" id="email" placeholder="evelynreed@unifesspa.edu.br">
+                </div>
+                <div class="btn-primary">
+                    <button type="submit">Salvar</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/sobre" data-page="sobre">Sobre</a>
+            <a href="/contato" data-page="contato">Contato</a>
+            <a href="/politica" data-page="politica">Política de Privacidade</a>
+            <a href="/termos" data-page="termos">Termos de Serviço</a>
+        </div>
+        <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
+    </footer>
+</body>
+
+</html>
