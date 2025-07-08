@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+    <link rel="stylesheet" href="../../style/global.css">
+    <link rel="stylesheet" href="../../style/editar-projeto.css">
+    <title>Editar projeto</title>
+</head>
+
+<body>
+    <header class="navegation">
+        <div class="logo">
+            <img src="../../assets/icons/Logo.png" alt="">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/home.html" data-page="home">Home</a></li>
+                <li><a href="/projetos" data-page="projetos">Projetos</a></li>
+                <li><a href="/contato" data-page="contato">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="/notificacoes" class="notification-icon">
+                <img src="../../assets/icons/notification.svg" alt="Ícone de Notificação">
+            </a>
+            <a href="/perfil" class="profile-pic">
+                <img src="../../assets/icons/perfilperson.png" alt="Foto de Perfil">
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="edicao-projeto">
+            <h1>Editar projeto</h1>
+            <form>
+                <!-- Dados principais -->
+                <fieldset class="dados-principais">
+                    <legend>Informações do projeto</legend>
+
+                    <div class="campo">
+                        <label for="titulo">Título do projeto</label>
+                        <input type="text" name="titulo" id="titulo" placeholder="Montagem e Manutenção de Computadores">
+                    </div>
+
+                    <div class="campo">
+                        <label for="subtitulo">Subtítulo</label>
+                        <input type="text" id="subtitulo" placeholder="Conhecimentos e técnicas básicas sobre hardware" />
+                    </div>
+
+                    <div class="campo">
+                        <label for="resumo">Visão geral do projeto</label>
+                        <textarea id="resumo"></textarea>
+                    </div>
+
+                    <div class="campo">
+                        <div class="upload-imagem">
+                            <img id="preview" src="../../assets/icons/image-placeholder.png" alt="Prévia da imagem" />
+                            <input type="file" id="imagem" accept="image/*" onchange="mostrarPreview(event)" />
+                        </div>
+
+                        <div>
+                            <label for="imagem" class="botao-upload">Alterar imagem</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Indicadores de impacto -->
+                <fieldset class="indicadores-impacto">
+                    <legend>Indicadores de impacto</legend>
+
+                    <div id="indicadores">
+                        <div class="indicador">
+                            <div>
+                                <label for="indicador1">Título do impacto</label>
+                                <input type="text" id="indicador1" placeholder="Membros da comunidade Atendidos" />
+                            </div>
+                            <div>
+                                <label for="valor1">Valor</label>
+                                <input type="number" id="valor1" placeholder="20" />
+                            </div>
+                            <div class="acoes">
+                                <button class="remover" type="button">
+                                    <img src="../../assets/icons/garbage.png" alt="Remover" />
+                                </button>
+                                <button class="adicionar" type="button">
+                                    <img src="../../assets/icons/+.png" alt="Adicionar" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Curso e status -->
+                <div class="linha">
+                    <div class="campo">
+                        <label for="curso">Curso</label>
+                        <select class="custom-select" id="curso">
+                            <option value="">Curso</option>
+                            <option value="engenharia-da-computacao">Engenharia da Computação</option>
+                            <option value="saude-coletiva">Saúde Coletiva</option>
+                            <option value="sistemas-de-informação">Sistemas de informação</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="status">Status</label>
+                        <select class="custom-select" id="status">
+                            <option value="">Status</option>
+                            <option value="ativo">Ativo</option>
+                            <option value="finalizado">Finalizado</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="palavra-chave">Palavras-chave</label>
+                        <select class="custom-select palavra-chave" id="palavra-chave">
+                            <option value="">Palavras-chave</option>
+                            <option value="tecnologia">#tecnologia</option>
+                            <option value="saude">#saude</option>
+                            <option value="inclusao">#inclusao</option>
+                            <option value="pet">#pet</option>
+                            <option value="comunitaria">#comunitaria</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Coordenador -->
+                <fieldset class="coordenador">
+                    <legend>Informações do coordenador</legend>
+
+                    <div class="campo">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" placeholder="Dra. Aline Farias" />
+                    </div>
+
+                    <div class="campo">
+                        <label for="cargo">Cargo</label>
+                        <input type="text" id="cargo" placeholder="Professora de Engenharia da Computação" />
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="alinefarias@unifesspa.edu.br" />
+                    </div>
+                </fieldset>
+
+                <!-- Botão salvar -->
+                <div class="btn">
+                    <button type="submit" class="btn-salvar">Salvar alterações</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script src="../../js/adicionarIndicadores.js"></script>
+
+    <script>
+        function mostrarPreview(event) {
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0];
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.opacity = "1";
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <script>
+        document.querySelectorAll('.custom-select').forEach(select => {
+            new Choices(select, {
+                searchEnabled: false,
+                itemSelectText: '',
+                shouldSort: false
+            });
+        });
+    </script>
+</body>
+
+</html>
