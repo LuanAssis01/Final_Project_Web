@@ -1,206 +1,263 @@
 /* Header */
 .navegation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 5rem;
-    border-bottom: 1px solid #e5e8eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  border-bottom: 1px solid #e5e8eb;
 }
 
 .logo img {
-    height: 40px;
+  height: 40px;
 }
 
 nav {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 nav ul {
-    list-style: none;
-    display: flex;
-    gap: 3rem;
+  list-style: none;
+  display: flex;
+  gap: 3rem;
 }
 
 nav ul li a {
-    color: #121417;
-    text-decoration: none;
-    font-size: 1.3rem;
-    font-weight: 600;
+  color: #121417;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
 nav ul li a:hover {
-    color: var(--magenta-hover);
+  color: var(--magenta-hover);
 }
 
 .active-nav {
-    color: var(--magenta-hover);
+  color: var(--magenta-hover);
 }
 
 .user-actions {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    margin-left: 6rem;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-left: 6rem;
 }
 
 .notification-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #F2F2F5;
-    border-radius: 1rem;
-    height: 4rem;
-    width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f5;
+  border-radius: 1rem;
+  height: 4rem;
+  width: 4rem;
 }
 
 .notification-icon img {
-    height: 2.5rem;
-    width: 2.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
 }
 
 .profile-pic img {
-    height: 4rem; 
-    width: 4rem; 
-    border-radius: 50%;
-    object-fit: cover;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 header .projetos {
-    color: var(--magenta);
+  color: var(--magenta);
 }
 
+/* Botão hamburguer visível apenas no mobile */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+/* Menu lateral (side-menu) */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s ease-in-out;
+  padding: 2rem 1rem;
+  z-index: 1000;
+}
+
+/* Ativa o menu */
+.side-menu.open {
+  left: 0;
+}
+
+/* Botão para fechar */
+.side-menu .close-menu {
+  font-size: 3rem;
+  background: none;
+  border: none;
+  display: block;
+  margin-left: 1.5rem;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+/* Lista de links do menu lateral */
+.side-menu ul {
+  list-style: none;
+  padding: 1rem;
+}
+
+.side-menu ul li {
+  margin: 2rem 2rem;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.6rem;
+}
+
+.side-menu ul li a:hover {
+  color: var(--magenta-hover);
+}
 
 /* main */
 main {
-    max-width: 1080px;
-    width: 90%;
-    margin: 2rem auto;
-    padding: 2rem 1rem
+  max-width: 1080px;
+  width: 90%;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
 }
 
 main .wrapper {
-    max-width: 100rem;
-    width: 100%;
+  max-width: 100rem;
+  width: 100%;
 }
-
 
 /* Breadcrumb */
 nav[aria-label="breadcrumb"] ol {
-    display: flex;
-    gap: 0.5rem;
-    font-size: 1.3rem;
-    color:#121417;
-    list-style: none;
-    padding: 0;
-    margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  color: #121417;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
 }
 nav[aria-label="breadcrumb"] ol li::after {
-    content: "/";
-    margin-left: 0.5rem;
-    color: #9ca3af;
+  content: "/";
+  margin-left: 0.5rem;
+  color: #9ca3af;
 }
 nav[aria-label="breadcrumb"] ol li:last-child::after {
-    content: "";
+  content: "";
 }
 nav[aria-label="breadcrumb"] a {
-    text-decoration: none;
-    color: #6b7280;
+  text-decoration: none;
+  color: #6b7280;
 }
 li[aria-current="page"] {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 /* Cabeçalho */
 .title h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 3rem 0 1.5rem 0;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 3rem 0 1.5rem 0;
 }
 .title p {
-    color: #6b7280;
-    margin-bottom: 3rem;
+  color: #6b7280;
+  margin-bottom: 3rem;
 }
 
 /* Banner */
 figure {
-    width: 45rem;
-    height: 25rem;
-    background-color:#F2F2F5;
-    border-radius: 2rem;
-    margin-bottom: 3rem;
+  width: 45rem;
+  height: 25rem;
+  background-color: #f2f2f5;
+  border-radius: 2rem;
+  margin-bottom: 3rem;
 }
 
 figure img {
-    width: 100%;
-    border-radius: 2rem;
-    object-fit: cover;
+  width: 100%;
+  border-radius: 2rem;
+  object-fit: cover;
 }
 
 /*Seções*/
 section {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .visao-geral p {
-    text-align: justify;
-    font-weight: 500;
+  text-align: justify;
+  font-weight: 500;
 }
 
 section h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
 }
 
-.info-gerais{
-    margin: 4rem 0 5rem 0;
+.info-gerais {
+  margin: 4rem 0 5rem 0;
 }
 
-#info-gerais{
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
+#info-gerais {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
 }
 
 .indicadores {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    padding: 0;
-    list-style: none;
-    margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+  list-style: none;
+  margin-top: 1rem;
 }
 
 .indicadores li {
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid #dee0e3;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 120px;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #dee0e3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 120px;
 }
 .indicadores li strong {
-    font-size: 1.6rem;
-    font-weight: 500;
-    margin-bottom: 0.9rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 0.9rem;
 }
 .indicadores li span {
-    font-size: 2.5rem;
-    font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 .status {
-    margin-left: 1rem;
-    background-color: var(--verdin);
-    padding: 0 0.7rem;
-    border-radius: 0.5rem;
+  margin-left: 1rem;
+  background-color: var(--verdin);
+  padding: 0 0.7rem;
+  border-radius: 0.5rem;
 }
 
 .palavra-chave {
-    display: flex;
-    gap: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
 }
 
 /* Coordenador */
@@ -212,9 +269,9 @@ section h2 {
 }
 
 .perf-coord {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 .perf-coord img {
   width: 64px;
@@ -233,8 +290,8 @@ section h2 {
 
 /* Botão de inscrição */
 .botton {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 .botao-participar {
   display: inline-block;
@@ -252,21 +309,62 @@ section h2 {
 
 /* Footer */
 footer {
-    padding: 2rem 4rem;
-    text-align: center;
+  padding: 2rem 4rem;
+  text-align: center;
 }
 
 .footer-links {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15rem;
-    margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15rem;
+  margin-bottom: 3rem;
 }
 
 .footer-links a,
 footer p {
-    text-decoration: none;
-    color: #6B7582;
-    font-size: 1.6rem;
+  text-decoration: none;
+  color: #6b7582;
+  font-size: 1.6rem;
+}
+
+@media (max-width: 768px) {
+  main {
+    margin: 2.2rem auto;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
+
+  .footer-links {
+    gap: 1.5rem;
+  }
+
+  .footer-links a,
+  footer p {
+    font-size: 1.4rem;
+  }
+  .footer-links {
+    gap: 4rem;
+  }
+
+  nav,
+  .btn-entrar {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  figure {
+    width: 90%;
+    height: auto;
+  }
+}
+
+/* 💻 Responsivo para tablets entre 769px e 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .footer-links {
+    gap: 8rem;
+  }
 }
