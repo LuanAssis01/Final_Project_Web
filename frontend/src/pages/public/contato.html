@@ -1,84 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../style/global.css">
-    <link rel="stylesheet" href="../../style/contato.css">
+    <link rel="stylesheet" href="../../style/global.css" />
+    <link rel="stylesheet" href="../../style/contato.css" />
     <title>Contato</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <div class="logo">
-            <img src="../../assets/icons/Logo.png" alt="">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="../../../home.html" data-page="home" class="home">Home</a></li>
-                <li><a href="projetos.html" data-page="projetos" class="projetos">Projetos</a></li>
-                <li><a href="contato.html" data-page="contato" class="contato">Contato</a></li>
-                <li><a href="sobre.html" data-page="sobre" class="sobre">Sobre</a></li>
-            </ul>
-        </nav>
-        <a href="login.html" class="btn-entrar" data-page="login">Entrar</a>
+      <div class="logo">
+        <img src="../../assets/icons/Logo.png" alt="" />
+      </div>
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+
+      <nav class="mobile-hidden">
+        <ul>
+          <li><a href="../../../home.html" data-page="home" class="home">Home</a></li>
+          <li>
+            <a
+              href="projetos.html"
+              data-page="projetos"
+              class="projetos"
+              >Projetos</a
+            >
+          </li>
+          <li>
+            <a
+              href="contato.html"
+              data-page="contato"
+              class="contato"
+              >Contato</a
+            >
+          </li>
+          <li>
+            <a
+              href="sobre.html"
+              data-page="sobre"
+              class="sobre"
+              >Sobre</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <a
+        href="login.html"
+        class="btn btn-entrar"
+        data-page="login"
+        >Entrar</a
+      >
+
+      <!-- Menu lateral escondido -->
+      <aside class="side-menu">
+        <button class="close-menu" aria-label="Fechar menu">&times;</button>
+        <ul>
+          <li><a href="../../../home.html" class="home">Home</a></li>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+        <a href="login.html" id="btn-lateral" class="btn"
+          >Entrar</a
+        >
+      </aside>
     </header>
 
     <main>
-        <div class="wrapper">
-            <section class="contato-form">
-                <div class="info">
-                    <h1>Entre em contato conosco</h1>
-                    <p>
-                        Se você tiver alguma dúvida, sugestão ou precisar de suporte,
-                        não hesite em nos contatar. Estamos aqui para ajudar!
-                    </p>
-                </div>
-                <form>
-                    <div class="label-nome">
-                        <label for="nome">Nome completo</label>
-                        <input type="text" name="nome" id="nome" required>
-                    </div>
+      <div class="wrapper">
+        <section class="contato-form">
+          <div class="info">
+            <h1>Entre em contato conosco</h1>
+            <p>
+              Se você tiver alguma dúvida, sugestão ou precisar de suporte, não
+              hesite em nos contatar. Estamos aqui para ajudar!
+            </p>
+          </div>
+          <form>
+            <div class="label-nome">
+              <label for="nome">Nome completo</label>
+              <input type="text" name="nome" id="nome" required />
+            </div>
 
-                    <div class="label-email">
-                        <label for="email">E-mail</label>
-                        <input type="email" name="email" id="email" required>
-                    </div>
+            <div class="label-email">
+              <label for="email">E-mail</label>
+              <input type="email" name="email" id="email" required />
+            </div>
 
-                    <div class="label-assunto">
-                        <label for="assunto">Assunto</label>
-                        <input type="text" name="assunto" id="assunto" required>
-                    </div>
+            <div class="label-assunto">
+              <label for="assunto">Assunto</label>
+              <input type="text" name="assunto" id="assunto" required />
+            </div>
 
-                    <div class="label-mensagem">
-                        <label for="mensagem">Mensagem</label>
-                        <textarea name="mensagem" id="mensagem" required></textarea>
-                    </div>
+            <div class="label-mensagem">
+              <label for="mensagem">Mensagem</label>
+              <textarea name="mensagem" id="mensagem" required></textarea>
+            </div>
 
-                    <button type="submit" class="btn-primary">Enviar mensagem</button>
-                </form>
-            </section>
+            <button type="submit" class="btn-primary">Enviar mensagem</button>
+          </form>
+        </section>
 
-            <section class="contato-info">
-                <h2>Informações de contato</h2>
-                <p>E-mail: extensao@unifesspa.edu.br</p>
-                <p>Endereço: Av. dos Estudantes, s/h - Cidade Universitária, Marabá - PA, 68507-590</p>
-            </section>
-        </div>
+        <section class="contato-info">
+          <h2>Informações de contato</h2>
+          <p>E-mail: extensao@unifesspa.edu.br</p>
+          <p>
+            Endereço: Av. dos Estudantes, s/h - Cidade Universitária, Marabá -
+            PA, 68507-590
+          </p>
+        </section>
+      </div>
     </main>
 
     <footer>
-        <div class="footer-links">
-            <a href="sobre.html" data-page="sobre">Sobre</a>
-            <a href="contato.html" data-page="contato">Contato</a>
-            <a href="/politica" data-page="politica">Política de Privacidade</a>
-            <a href="/termos" data-page="termos">Termos de Serviço</a>
-        </div>
-        <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
+      <div class="footer-links">
+        <a href="sobre.html" data-page="sobre">Sobre</a>
+        <a href="contato.html" data-page="contato">Contato</a>
+        <a href="/politica" data-page="politica">Política de Privacidade</a>
+        <a href="/termos" data-page="termos">Termos de Serviço</a>
+      </div>
+      <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
     </footer>
-</body>
 
+    <script src="../../js/openMenu.js"></script>
+  </body>
 </html>
