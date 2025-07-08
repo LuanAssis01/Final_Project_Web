@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+
+    <link rel="stylesheet" href="../../style/enviar-proposta.css" />
+    <link rel="stylesheet" href="../../style/global.css" />
+    <title>Enviar_Proposta</title>
+</head>
+
+<body>
+    <header class="navegation">
+        <div class="logo">
+            <img src="../../assets/icons/Logo.png" alt="">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/home.html" data-page="home">Home</a></li>
+                <li><a href="/projetos" data-page="projetos">Projetos</a></li>
+                <li><a href="/contato" data-page="contato">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="user-actions">
+            <a href="/notificacoes" class="notification-icon">
+                <img src="../../assets/icons/notification.svg" alt="Ícone de Notificação">
+            </a>
+            <a href="/perfil" class="profile-pic">
+                <img src="../../assets/icons/perfilperson.png" alt="Foto de Perfil">
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="formulario-projeto">
+            <h1>Enviar proposta de projeto</h1>
+            <div>
+                <form>
+                    <div class="titulo">
+                        <label for="titulo">Título do projeto</label>
+                        <input type="text" name="titulo" id="titulo" placeholder="Insira o título do projeto" />
+                    </div>
+                    <div class="curso">
+                        <label for="curso">Curso</label>
+                        <select class="custom-select" name="curso" id="curso">
+                            <option value="" disabled selected hidden>Selecione o curso</option>
+                            <option value="sistemas-de-informação">Sistemas de informação</option>
+                            <option value="engenharia-da-computacao">Engenharia da Computação</option>
+                            <option value="saude-coletiva">Saúde Coletiva</option>
+                        </select>
+                    </div>
+                    <div class="descricao">
+                        <label for="descricao">Descrição do projeto</label>
+                        <textarea id="descricao" name="descricao" placeholder="Descreva o seu projeto..."></textarea>
+                    </div>
+                    <div class="data">
+                        <label for="data">Data de início</label>
+                        <input type="date" name="data" id="data" placeholder="dd/mm/aaaa" />
+                    </div>
+                    <div class="duracao">
+                        <label for="duracao">Duração (Meses)</label>
+                        <input type="text" name="duracao" id="duracao" placeholder="Digite a duração do projeto ">
+                    </div>
+                    <div class="resultado">
+                        <label for="">Resultados esperados</label>
+                        <textarea id="" name="" placeholder="Descreva..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="box">
+                <label class="upload-arquivo" for="arquivo">
+                    <div class="upload-texto">
+                        <h3>Carregar documento de proposta de projeto</h3>
+                        <p>
+                            Arraste e solte ou navegue para enviar o documento da sua proposta.<br>
+                        </p>
+                        <p>
+                            Formatos aceitos: PDF, DOCX. Tamanho máximo: 10 MB.
+                        </p>
+                    </div>
+                    <h4>Navegar pelos arquivos</h4>
+                </label>
+
+                <input type="file" id="arquivo" name="arquivo" style="display: none" />
+                <div>
+                    <p id="nome-arquivo">Nenhum arquivo selecionado</p>
+                </div>
+            </div>
+
+            <div class="botao-container">
+                <button type="submit" class="btn-enviar">Enviar proposta</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+    <script>
+        document.querySelectorAll('.custom-select').forEach(select => {
+            new Choices(select, {
+                searchEnabled: false,
+                itemSelectText: '',
+                shouldSort: false
+            });
+        });
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+    <script>
+        flatpickr("#data", {
+            locale: flatpickr.l10ns.pt,
+            dateFormat: "d/m/Y",
+            disableMobile: true,
+        });
+    </script>
+
+    <script>
+        const inputArquivo = document.getElementById('arquivo');
+        const nomeArquivo = document.getElementById('nome-arquivo');
+
+        inputArquivo.addEventListener('change', function () {
+            if (this.files && this.files.length > 0) {
+                nomeArquivo.textContent = this.files[0].name;
+            } else {
+                nomeArquivo.textContent = 'Nenhum arquivo selecionado';
+            }
+        });
+    </script>
+</body>
+
+</html>
