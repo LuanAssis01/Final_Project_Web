@@ -1,136 +1,168 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../../css/global.css">
-    <link rel="stylesheet" href="../../css/projetosStudent.css">
+    <link rel="stylesheet" href="../../style/global.css" />
+    <link rel="stylesheet" href="../../style/projetosStudent.css" />
     <title>Projetos</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="navegation">
-        <div class="logo">
-            <img src="../assets/Logo.png" alt="">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="/home.html" data-page="home">Home</a></li>
-                <li><a href="/projetos" data-page="projetos" class="active-nav">Projetos</a></li>
-                <li><a href="/contato" data-page="contato">Contato</a></li>
-            </ul>
-        </nav>
-        <div class="user-actions">
-            <a href="/notificacoes" class="notification-icon">
-                <img src="../assets/notification.svg" alt="Ícone de Notificação">
-            </a>
-            <a href="/perfil" class="profile-pic">
-                <img src="../assets/perfilperson.png" alt="Foto de Perfil">
-            </a>
-        </div>
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+
+      <aside class="side-menu">
+        <button class="close-menu" aria-label="Fechar menu">&times;</button>
+        <ul>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </aside>
+
+      <div class="logo mobile-hidden">
+        <img src="../../assets/icons/Logo.png" alt="" />
+      </div>
+      <nav class="mobile-hidden">
+        <ul>
+          <li><a href="/portal" data-page="home">Home</a></li>
+          <li>
+            <a href="/projetos" data-page="projetos" class="active-nav"
+              >Projetos</a
+            >
+          </li>
+          <li><a href="/contato" data-page="contato">Contato</a></li>
+        </ul>
+      </nav>
+      
+      <div class="user-actions">
+        <a href="/notificacoes" class="notification-icon">
+          <img
+            src="../../assets/icons/notification.svg"
+            alt="Ícone de Notificação"
+          />
+        </a>
+        <a href="/perfil" class="profile-pic">
+          <img src="../../assets/icons/perfilperson.png" alt="Foto de Perfil" />
+        </a>
+      </div>
     </header>
 
     <main>
-       <!-- Breadcrumb de navegação -->
-        <nav aria-label="breadcrumb">
-            <ol>
-            <li><a href="/projetos">Projetos</a></li>
-            <li aria-current="page">Iniciativa de Saúde Comunitária</li>
-            </ol>
-        </nav>
+      <!-- Breadcrumb de navegação -->
+      <nav aria-label="breadcrumb">
+        <ol>
+          <li><a href="/projetos">Projetos</a></li>
+          <li aria-current="page">Iniciativa de Saúde Comunitária</li>
+        </ol>
+      </nav>
 
-        <!-- Cabeçalho do projeto -->
-        <header class="title">
-            <h1>Iniciativa de Saúde Comunitária</h1>
-            <p>Melhorando os resultados de saúde em comunidades carentes.</p>
-        </header>
+      <!-- Cabeçalho do projeto -->
+      <header class="title">
+        <h1>Iniciativa de Saúde Comunitária</h1>
+        <p>Melhorando os resultados de saúde em comunidades carentes.</p>
+      </header>
 
-        <!-- Imagem do banner do projeto -->
-        <figure>
-            <img src="caminho-da-imagem.jpg" alt="Imagem representando saúde comunitária">
-        </figure>
+      <!-- Imagem do banner do projeto -->
+      <figure>
+        <img
+          src="../../assets/images/saude-comunitaria.png"
+          alt="Imagem representando saúde comunitária"
+        />
+      </figure>
 
-        <!-- Seção de descrição -->
-        <section class="visao-geral">
-            <h2>Visão geral do projeto</h2>
+      <!-- Seção de descrição -->
+      <section class="visao-geral">
+        <h2>Visão geral do projeto</h2>
+        <p>
+          A Iniciativa de Saúde Comunitária é um esforço colaborativo entre a
+          universidade e as comunidades locais para abordar as disparidades de
+          saúde e promover o bem-estar. O projeto se concentra na implementação
+          de intervenções baseadas em evidências, no fornecimento de educação em
+          saúde e na capacitação da comunidade para sustentar melhorias na
+          saúde...
+        </p>
+      </section>
+
+      <!-- Seção de indicadores -->
+      <section class="indicadores-section">
+        <h2>Indicadores de Impacto</h2>
+        <ul class="indicadores">
+          <li>
+            <strong>Membros da comunidade atendidos</strong>
+            <span>20</span>
+          </li>
+          <li>
+            <strong>Oficinas realizadas</strong>
+            <span>5</span>
+          </li>
+          <li>
+            <strong>Horas de voluntariado contribuídas</strong>
+            <span>1000+</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Informações adicionais do projeto -->
+      <section class="info-gerais">
+        <h2>Informações gerais do projeto</h2>
+        <div id="info-gerais">
+          <p><strong class="curso">Curso:</strong> Saúde Coletiva</p>
+          <p><strong>Status:</strong><span class="status">Ativo</span></p>
+          <div class="palavra-chave">
+            <strong>Palavras-chave:</strong>
             <p>
-            A Iniciativa de Saúde Comunitária é um esforço colaborativo entre a universidade e as comunidades locais 
-            para abordar as disparidades de saúde e promover o bem-estar. O projeto se concentra na implementação 
-            de intervenções baseadas em evidências, no fornecimento de educação em saúde e na capacitação da 
-            comunidade para sustentar melhorias na saúde...
+              <span>#saude</span>
+              <span>#inclusao</span>
+              <span>#comunitaria</span>
             </p>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <!-- Seção de indicadores -->
-        <section class="indicadores-section">
-            <h2>Indicadores de Impacto</h2>
-            <ul class="indicadores">
-                <li>
-                    <strong>Membros da comunidade atendidos</strong>
-                    <span>20</span>
-                </li>
-                <li>
-                    <strong>Oficinas realizadas</strong>
-                    <span>5</span>
-                </li>
-                <li>
-                    <strong>Horas de voluntariado contribuídas</strong>
-                    <span>1000+</span>
-                </li>
-            </ul>
-        </section>
+      <!-- Seção do coordenador -->
+      <section class="coordenador">
+        <h2 id="coordenador">Coordenador do Projeto</h2>
+        <div class="perf-coord">
+          <img
+            src="../../assets/images/perfilperson.png"
+            alt="Dra. Olivia Bennett"
+          />
+          <div>
+            <strong>Dra. Olivia Bennett</strong>
+            <p>Professora de Saúde Pública</p>
+          </div>
+        </div>
+        <p>
+          <strong>Dúvidas?</strong> Entre em contato pelo e-mail:<br />
+          <a href="mailto:oliviabennett@unifesspa.edu.br"
+            >oliviabennett@unifesspa.edu.br</a
+          >
+        </p>
+      </section>
 
-        <!-- Informações adicionais do projeto -->
-        <section class="info-gerais">
-            <h2>Informações gerais do projeto</h2>
-            <div id="info-gerais">
-                <p><strong>Curso:</strong class="curso"> Saúde Coletiva</p>
-                <p><strong>Status:</strong><span class="status">Ativo</span></p>
-                <div class="palavra-chave"><strong>Palavras-chave:</strong> 
-                    <p>
-                        <span>#saude</span> 
-                        <span>#inclusao</span> 
-                        <span>#comunitaria</span>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção do coordenador -->
-        <section class="coordenador">
-            <h2 id="coordenador">Coordenador do Projeto</h2>
-            <div class="perf-coord">
-                <img src="../assets/perfilperson.png" alt="Dra. Olivia Bennett">
-                <div>
-                    <strong>Dra. Olivia Bennett</strong>
-                    <p>Professora de Saúde Pública</p>
-                </div>
-
-            </div>
-            <p>
-                <strong>Dúvidas?</strong> Entre em contato pelo e-mail:<br>
-                <a href="mailto:oliviabennett@unifesspa.edu.br">oliviabennett@unifesspa.edu.br</a>
-            </p>
-        </section>
-
-        <!-- Botão de participação -->
-        <section class="botton">
-            <a href="#" class="botao-participar">Cadastre-se no Projeto</a>
-        </section>
+      <!-- Botão de participação -->
+      <section class="botton">
+        <a href="#" class="botao-participar">Cadastre-se no Projeto</a>
+      </section>
     </main>
 
     <footer>
-        <div class="footer-links">
-            <a href="/sobre" data-page="sobre">Sobre</a>
-            <a href="/contato" data-page="contato">Contato</a>
-            <a href="/politica" data-page="politica">Política de Privacidade</a>
-            <a href="/termos" data-page="termos">Termos de Serviço</a>
-        </div>
-        <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
+      <div class="footer-links">
+        <a href="/sobre" data-page="sobre">Sobre</a>
+        <a href="/contato" data-page="contato">Contato</a>
+        <a href="/politica" data-page="politica">Política de Privacidade</a>
+        <a href="/termos" data-page="termos">Termos de Serviço</a>
+      </div>
+      <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
     </footer>
-</body>
 
+    <script src="../../js/openMenu.js"></script>
+  </body>
 </html>
