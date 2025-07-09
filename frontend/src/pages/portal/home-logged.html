@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../style/global.css" />
+    <link rel="stylesheet" href="../../style/home-logged.css" />
+    <title>Home</title>
+  </head>
+
+  <body>
+    <header class="navegation">
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+
+      <aside class="side-menu">
+        <button class="close-menu" aria-label="Fechar menu">&times;</button>
+        <ul>
+          <li><a href="projetos.html">Projetos</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+        </ul>
+      </aside>
+
+      <div class="logo mobile-hidden">
+        <img src="../../assets/icons/Logo.png" alt="" />
+      </div>
+      <nav class="mobile-hidden">
+        <ul>
+          <li><a href="/portal" data-page="home">Home</a></li>
+          <li>
+            <a href="/projetos" data-page="projetos" class="active-nav"
+              >Projetos</a
+            >
+          </li>
+          <li><a href="/contato" data-page="contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="user-actions">
+        <a href="/notificacoes" class="notification-icon">
+          <img
+            src="../../assets/icons/notification.svg"
+            alt="Ícone de Notificação"
+          />
+        </a>
+        <a href="/perfil" class="profile-pic">
+          <img src="../../assets/icons/perfilperson.png" alt="Foto de Perfil" />
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-img">
+          <img
+            src="../../assets/images/campus2.png"
+            alt="Imagem do campus"
+            data-hero
+          />
+          <a
+            href="../../src/pages/public/projetos.html"
+            class="btn-explorar"
+            data-page="projetos"
+            >Explorar projetos</a
+          >
+          <div class="hero-text">
+            <h1>Conecte, colabore e crie impacto</h1>
+            <p>
+              O Unifesspa+ é o seu centro para projetos de extensão
+              universitária. Encontre oportunidades, junte-se a equipes e faça a
+              diferença na sua comunidade.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="projetos-destaque">
+        <h2>Projetos em destaque</h2>
+        <div class="projetos-grid">
+          <article>
+            <img src="../../assets/images/projeto1.png" alt="Saúde PET" />
+            <div>
+              <h3>Saúde PET</h3>
+              <p>Melhorando os resultados de saúde em comunidades carentes.</p>
+            </div>
+          </article>
+          <article>
+            <img src="../../assets/images/projeto2.png" alt="PID" />
+            <div>
+              <h3>PID</h3>
+              <p>Programa de inclusão digital.</p>
+            </div>
+          </article>
+          <article>
+            <img
+              src="../../assets/images/projeto1.png"
+              alt="Iniciativa de Saúde Comunitária"
+            />
+            <div>
+              <h3>Iniciativa de Saúde Comunitária</h3>
+              <p>Melhorando os resultados de saúde em comunidades carentes.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <aside class="como-funciona">
+        <h2>Como funciona?</h2>
+        <p>Para se inscrever em um projeto de extensão, basta se:</p>
+        <ol>
+          <li>Cadastrar</li>
+          <li>Encontrar um projeto</li>
+          <li>Participar</li>
+        </ol>
+      </aside>
+    </main>
+    <footer>
+      <div class="footer-links">
+        <a href="/sobre" data-page="sobre">Sobre</a>
+        <a href="/contato" data-page="contato">Contato</a>
+        <a href="/politica" data-page="politica">Política de Privacidade</a>
+        <a href="/termos" data-page="termos">Termos de Serviço</a>
+      </div>
+      <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="../frontend/src/js/openMenu.js"></script>
+  </body>
+</html>

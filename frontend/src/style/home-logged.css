@@ -1,0 +1,399 @@
+/* Header */
+.navegation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  border-bottom: 1px solid #e5e8eb;
+}
+
+.logo img {
+  height: 40px;
+}
+
+nav {
+  margin-left: auto;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 3rem;
+}
+
+nav ul li a {
+  color: #121417;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+nav ul li a:hover {
+  color: var(--magenta-hover);
+}
+
+.active-nav {
+  color: var(--magenta-hover);
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-left: 6rem;
+}
+
+.notification-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f5;
+  border-radius: 1rem;
+  height: 4rem;
+  width: 4rem;
+}
+
+.notification-icon img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.profile-pic img {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+header .projetos {
+  color: var(--magenta);
+}
+
+/* Botão hamburguer visível apenas no mobile */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+/* Menu lateral (side-menu) */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s ease-in-out;
+  padding: 2rem 1rem;
+  z-index: 1000;
+}
+
+/* Ativa o menu */
+.side-menu.open {
+  left: 0;
+}
+
+/* Botão para fechar */
+.side-menu .close-menu {
+  font-size: 3rem;
+  background: none;
+  border: none;
+  display: block;
+  margin-left: 1.5rem;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+/* Lista de links do menu lateral */
+.side-menu ul {
+  list-style: none;
+  padding: 1rem;
+}
+
+.side-menu ul li {
+  margin: 2rem 2rem;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.6rem;
+}
+
+.side-menu ul li a:hover {
+  color: var(--magenta-hover);
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  justify-content: center;
+  padding: 8rem;
+  background: var(--fumaça);
+}
+
+.hero-img {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.hero-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  min-height: 60rem;
+  border-radius: 1.2rem;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.hero-text h1 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 5.2rem;
+  font-weight: 900;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  letter-spacing: -2px;
+}
+
+.hero-text p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  margin-top: 1rem;
+  max-width: 62rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-explorar {
+  position: absolute;
+  top: 4rem;
+  right: 6rem;
+  background: var(--verdin);
+  color: var(--azul-petroleo);
+  padding: 1.2rem 1.6rem;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Projetos destaque */
+.projetos-destaque {
+  padding: 8rem 16rem 8rem 16rem;
+}
+
+.projetos-destaque h2 {
+  font-size: 3rem;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 3.2rem;
+  font-weight: 700;
+}
+
+.projetos-destaque h3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.projetos-destaque p {
+  font-size: 1.4rem;
+  font-family: "Montserrat", sans-serif;
+  color: #6b7582;
+  font-weight: 400;
+}
+
+.projetos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 5rem;
+}
+
+.projetos-grid article {
+  width: 100%;
+  height: auto;
+}
+
+.projetos-grid article div {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 0rem;
+  gap: 0.5rem;
+}
+
+.projetos-grid img {
+  width: 100%;
+  height: auto;
+  max-width: 50rem;
+  border-radius: 1.2rem;
+}
+
+/* Como funciona */
+.como-funciona {
+  padding: 5.7rem 16rem;
+  background: var(--fumaça);
+  margin-bottom: 3.2rem;
+}
+
+.como-funciona h2 {
+  font-size: 3rem;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.como-funciona p,
+.como-funciona ol {
+  font-size: 2rem;
+}
+
+.como-funciona p {
+  margin-bottom: 2rem;
+}
+
+.como-funciona ol {
+  padding-left: 2.3rem;
+  margin-top: 1rem;
+}
+
+/* Footer */
+footer {
+  padding: 2rem 4rem;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15rem;
+  margin-bottom: 3rem;
+}
+
+.footer-links a,
+footer p {
+  text-decoration: none;
+  color: #6b7582;
+  font-size: 1.6rem;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  padding: 2rem 1rem;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu .close-menu {
+  font-size: 3rem;
+  background: none;
+  border: none;
+  display: block;
+  margin-left: auto;
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+
+/* Estilo do menu lateral */
+.side-menu ul {
+  list-style: none;
+  padding: 1rem;
+}
+
+.side-menu ul li {
+  margin: 2rem 2rem;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.6rem;
+}
+
+/*Responsividade*/
+
+/* Celulares em geral */
+@media (max-width: 768px) {
+  .logo img {
+    height: 25px;
+  }
+  .footer-links {
+    gap: 4rem;
+  }
+  .projetos-destaque {
+    padding: 8rem 8rem;
+  }
+  .hero {
+    padding: 8rem 3rem;
+  }
+  .hero-img img {
+    height: auto;
+    min-height: 50rem;
+  }
+  .hero-text {
+    padding: 2rem;
+  }
+  .hero-text h1 {
+    font-size: 4rem;
+  }
+  .hero-text p {
+    margin-bottom: 2rem;
+  }
+  .como-funciona {
+    padding: 5.7rem 8rem;
+  }
+  .mobile-hidden {
+    display: none;
+  }
+  nav,
+  .btn-entrar {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  figure {
+    width: 90%;
+    height: auto;
+  }
+}
+
+/* Tablets (768px a 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .projetos-destaque {
+    padding: 8rem 8rem;
+  }
+  .footer-links {
+    gap: 4rem;
+  }
+}
