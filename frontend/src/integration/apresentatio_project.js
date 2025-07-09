@@ -1,4 +1,3 @@
-// Inicializa com projetos de exemplo, se ainda não existirem
 const mockProjetos = [
   {
     id: 1,

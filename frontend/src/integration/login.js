@@ -79,12 +79,13 @@ const loginForm = document.querySelector('#login-form');
 if (loginForm) {
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const email = document.querySelector('#login-email').value;
     const password = document.querySelector('#password').value; 
 
     try {
       const user = await login(email, password);
       alert(`Bem-vindo, ${user.name}! Redirecionando...`); 
-      window.location.href = '../portal/home-logged.html';
+      window.location.href = '/frontend/src/pages/portal/home-logged.html';
     } catch (err) {
       alert(err.message); 
     }

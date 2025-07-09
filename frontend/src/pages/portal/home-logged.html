@@ -42,7 +42,7 @@
       <a href="/notificacoes" class="notification-icon">
         <img src="../../assets/icons/notification.svg" alt="Ícone de Notificação" />
       </a>
-      <a href="#" class="profile-pic">
+      <a href="perfil-professor.html" class="profile-pic">
         <img src="../../assets/icons/perfilperson.png" alt="Foto de Perfil" />
       </a>
     </div>
@@ -62,10 +62,10 @@
           </p>
         </div>
       </div>
-<<<<<<< HEAD
+
     </section>
-=======
-      <nav class="mobile-hidden">
+
+      <!-- <nav class="mobile-hidden">
         <ul>
           <li>
             <a href="home-logged.html" data-page="home" class="active-nav"
@@ -77,8 +77,7 @@
           </li>
           <li><a href="contato-logged.html" data-page="contato">Contato</a></li>
         </ul>
-      </nav>
->>>>>>> 22c6265754f08cae216fa9d9b0bb070c1af13db4
+      </nav> -->
 
     <section class="projetos-destaque">
       <h2>Projetos em destaque</h2>
@@ -131,29 +130,23 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      // Seleciona o elemento da imagem de perfil
       const profilePic = document.querySelector(".profile-pic");
 
-      // Mapeamento de tipos de usuário para URLs
       const roleRedirects = {
-        Administrador: "/src/pages/admin/dashboard.html",
-        Professor: "/scr/pages/portal/perfil-professor.html",
-        CommunityMember: "/src/pages/portal/projeto-aluno.html"
+        Administrador: "/admin/dashboard.html",
+        Professor: "perfil-professor.html",
+        CommunityMember: "projeto-aluno.html"
       };
 
-      // Adiciona evento de clique na imagem de perfil
       profilePic.addEventListener("click", (e) => {
-        e.preventDefault(); // Impede o comportamento padrão do link
+        e.preventDefault();
 
-        // Obtém o tipo de usuário do localStorage
         const userRole = localStorage.getItem("userRole");
 
-        // Determina a URL de redirecionamento
         const redirectUrl = userRole && roleRedirects[userRole]
           ? roleRedirects[userRole]
-          : "/login.html";
+          : "perfil-professor.html";
 
-        // Redireciona para a página correspondente
         window.location.href = redirectUrl;
       });
     });
