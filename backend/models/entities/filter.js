@@ -1,18 +1,16 @@
 export class Filter {
-  constructor({ area, category, location, status }) {
-    this.area = area;
-    this.category = category;
-    this.location = location;
+  constructor({ course, status, key_word }) {
+    this.course = course;
     this.status = status;
+    this.key_word = key_word;
   }
 
   async apply(projects) {
     return projects.filter(project => {
       return (
-        (!this.area || project.thematicArea === this.area) &&
-        (!this.category || project.category === this.category) &&
-        (!this.location || project.location === this.location) &&
-        (!this.status || project.status === this.status)
+        (!this.course || project.course === this.course) &&
+        (!this.status || project.status === this.status) &&
+        (!this.key_word || project.key_word == this.key_word)
       );
     });
   }

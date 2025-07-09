@@ -9,7 +9,8 @@ document.querySelector('form').addEventListener('submit', async (event) => {
   try {
     const user = await login(email, password);
     alert(`Bem-vindo, ${user.name}`);
-    // Redirecionar conforme role, se quiser
+
+    window.location.href = '/frontend/home.html';
   } catch (error) {
     alert('Falha no login: ' + error.message);
   }
