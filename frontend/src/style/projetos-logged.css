@@ -1,0 +1,394 @@
+/* Header */
+.navegation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+  border-bottom: 1px solid #e5e8eb;
+}
+
+.logo img {
+  height: 40px;
+}
+
+nav {
+  margin-left: auto;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 3rem;
+}
+
+nav ul li a {
+  color: #121417;
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+nav ul li a:hover {
+  color: var(--magenta-hover);
+}
+
+.active-nav {
+  color: var(--magenta-hover);
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-left: 6rem;
+}
+
+.notification-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f5;
+  border-radius: 1rem;
+  height: 4rem;
+  width: 4rem;
+}
+
+.notification-icon img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.profile-pic img {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+header .projetos {
+  color: var(--magenta);
+}
+
+/* Botão hamburguer visível apenas no mobile */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+/* Menu lateral (side-menu) */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s ease-in-out;
+  padding: 2rem 1rem;
+  z-index: 1000;
+}
+
+/* Ativa o menu */
+.side-menu.open {
+  left: 0;
+}
+
+/* Botão para fechar */
+.side-menu .close-menu {
+  font-size: 3rem;
+  background: none;
+  border: none;
+  display: block;
+  margin-left: 1.5rem;
+  margin-right: auto;
+  cursor: pointer;
+}
+
+/* Lista de links do menu lateral */
+.side-menu ul {
+  list-style: none;
+  padding: 1rem;
+}
+
+.side-menu ul li {
+  margin: 2rem 2rem;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.6rem;
+}
+
+.side-menu ul li a:hover {
+  color: var(--magenta-hover);
+}
+
+/* main */
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
+}
+
+main .wrapper {
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+/* pesquisa */
+.pesquisa {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.pesquisa input {
+  font-family: "Montserrat";
+  width: 100%;
+  padding: 2rem 6rem 2rem 6rem;
+  border: 1px solid transparent;
+  border-radius: 1.2rem;
+  background-color: #f2f2f5;
+  font-size: 1.6rem;
+}
+
+.pesquisa input:focus {
+  border: 1px solid var(--magenta);
+  outline: none;
+}
+
+.pesquisa h1 {
+  font-size: 3.2rem;
+}
+
+.pesquisa p {
+  font: 1.4rem;
+  color: #6b7582;
+}
+
+.pesquisa .input-busca {
+  position: relative;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.input-busca img {
+  position: absolute;
+  left: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Container flexível */
+.barra-pesquisa {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 3rem;
+  justify-content: flex-start;
+}
+
+/* Choices.js base */
+.barra-pesquisa .choices {
+  display: inline-block;
+}
+
+/* Estilo por tipo */
+.barra-pesquisa .choices:has(.custom-select.curso),
+.barra-pesquisa .choices:has(.custom-select.status),
+.barra-pesquisa .choices:has(.custom-select.palavras-chave) {
+  width: 20%;
+}
+
+.choices__inner {
+  border-radius: 0.8rem;
+  background-color: #f2f2f5;
+  border: none;
+  padding: 0.8rem 1rem;
+}
+
+.choices__list--dropdown {
+  border-radius: 0.8rem;
+  overflow: hidden;
+  border: none !important;
+}
+
+.choices__list--dropdown .choices__item--selectable.is-highlighted {
+  background-color: #eee;
+  color: #000;
+}
+
+/* projetos-grid */
+.projetos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 23rem;
+}
+
+.projetos-grid article {
+  background-color: #fff;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+.projetos-grid article:hover {
+  transform: scale(1.02);
+}
+
+.projetos-grid article img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 1.2rem;
+}
+
+.projetos-grid article div {
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.projetos-grid article h3 {
+  font-family: "Montserrat";
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--azul-petroleo);
+}
+
+.projetos-grid article p {
+  font-size: 1.4rem;
+  color: #6b7582;
+}
+
+/* Footer */
+footer {
+  padding: 2rem 4rem;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15rem;
+  margin-bottom: 3rem;
+}
+
+.footer-links a,
+footer p {
+  text-decoration: none;
+  color: #6b7582;
+  font-size: 1.6rem;
+}
+
+@media (max-width: 1024px) {
+  .barra-pesquisa .choices:has(.custom-select.status) {
+    max-width: 18rem;
+  }
+  .wrapper {
+    padding: 0 2rem;
+  }
+  .projetos-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .barra-pesquisa .choices:has(.custom-select.curso),
+  .barra-pesquisa .choices:has(.custom-select.status),
+  .barra-pesquisa .choices:has(.custom-select.palavras-chave) {
+    width: 30%;
+  }
+  .barra-pesquisa {
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+
+  .barra-pesquisa .choices {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .wrapper {
+    padding: 0 1.5rem;
+  }
+  .projetos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    gap: 0;
+  }
+
+  .projetos-grid article {
+    margin: 0 auto;
+  }
+  .footer-links {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footer-links a,
+  footer p {
+    font-size: 1.4rem;
+  }
+
+  .logo img {
+    height: 25px;
+  }
+  .footer-links {
+    gap: 4rem;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
+  nav,
+  .btn-entrar {
+    display: none;
+  }
+  .menu-toggle {
+    display: block;
+  }
+  figure {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .projetos-grid {
+    grid-template-columns: repeat(1, 1fr);
+    justify-content: center;
+    gap: 0;
+  }
+  .barra-pesquisa .choices:has(.custom-select.curso),
+  .barra-pesquisa .choices:has(.custom-select.status),
+  .barra-pesquisa .choices:has(.custom-select.palavras-chave) {
+    width: 40%;
+  }
+  .barra-pesquisa {
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+}
