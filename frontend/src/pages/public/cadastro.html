@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="../../style/global.css">
     <link rel="stylesheet" href="../../style/cadastro.css">
     <title>Cadastro</title>
 </head>
+
 <body>
     <div class="login-container">
         <aside class="logo-section">
@@ -18,41 +21,36 @@
             <header>
                 <h1>Cadastro</h1>
             </header>
-
-            <form>
+            <form id="register-form">
                 <div class="label-name">
-                    <label for="name">
-                        Nome
-                    </label>
-                    <input type="text" name="name" placeholder="Digite seu nome" required>
+                    <label for="register-name">Nome</label>
+                    <input type="text" id="register-name" name="name" placeholder="Digite seu nome" required>
                 </div>
 
                 <div class="label-email">
-                    <label for="email">
-                        E-mail
-                    </label>
-                    <input type="email" name="email" placeholder="Digite um e-mail" required>
+                    <label for="register-email">E-mail</label>
+                    <input type="email" id="register-email" name="email" placeholder="Digite um e-mail" required>
                     <span class="error-msg">Digite um e-mail válido</span>
                 </div>
 
                 <div class="label-password">
-                    <label for="password">
-                        Senha
-                    </label> 
+                    <label for="register-password">Senha</label>
                 </div>
 
                 <div class="password-wrapper">
-                    <input type="password" id="password" placeholder="Digite uma senha" required>
-                    <button type="button" id="togglePwd" aria-label="Monstrar senha">
+                    <input type="password" id="register-password" placeholder="Digite uma senha" required>
+                    <button type="button" id="togglePwd" aria-label="Mostrar senha">
                         <img src="../../assets/icons/eye.svg" alt="" id="iconPwd">
                     </button>
                 </div>
 
                 <button type="submit" class="btn-primary">Cadastrar</button>
             </form>
+
         </main>
     </div>
     <script src="../../js/mostrarSenha.js"></script>
-    <script type="module" src="../../js/register.js"></script>
+    <script type="module" src="../../integration/login.js"></script>
 </body>
+
 </html>
