@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../../style/global.css" />
+    <link rel="stylesheet" href="../../style/contato-logged.css" />
+    <title>Contato</title>
+  </head>
+
+  <body>
+    <header class="navegation">
+      <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+
+      <aside class="side-menu">
+        <button class="close-menu" aria-label="Fechar menu">&times;</button>
+        <ul>
+          <li><a href="home-logged.html">Home</a></li>
+          <li><a href="projetos-logged.html">Projetos</a></li>
+          <li><a href="contato-logged.html">Contato</a></li>
+        </ul>
+      </aside>
+
+      <div class="logo mobile-hidden">
+        <img src="../../assets/icons/Logo.png" alt="" />
+      </div>
+      <nav class="mobile-hidden">
+        <ul>
+          <li><a href="home-logged.html" data-page="home">Home</a></li>
+          <li>
+            <a href="projetos-logged.html" data-page="projetos" class="active-nav"
+              >Projetos</a
+            >
+          </li>
+          <li><a href="contato-logged.html" data-page="contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="user-actions">
+        <a href="/notificacoes" class="notification-icon">
+          <img
+            src="../../assets/icons/notification.svg"
+            alt="Ícone de Notificação"
+          />
+        </a>
+        <a href="/perfil" class="profile-pic">
+          <img src="../../assets/icons/perfilperson.png" alt="Foto de Perfil" />
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrapper">
+        <section class="contato-form">
+          <div class="info">
+            <h1>Entre em contato conosco</h1>
+            <p>
+              Se você tiver alguma dúvida, sugestão ou precisar de suporte, não
+              hesite em nos contatar. Estamos aqui para ajudar!
+            </p>
+          </div>
+          <form>
+            <div class="label-nome">
+              <label for="nome">Nome completo</label>
+              <input type="text" name="nome" id="nome" required />
+            </div>
+
+            <div class="label-email">
+              <label for="email">E-mail</label>
+              <input type="email" name="email" id="email" required />
+            </div>
+
+            <div class="label-assunto">
+              <label for="assunto">Assunto</label>
+              <input type="text" name="assunto" id="assunto" required />
+            </div>
+
+            <div class="label-mensagem">
+              <label for="mensagem">Mensagem</label>
+              <textarea name="mensagem" id="mensagem" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">Enviar mensagem</button>
+          </form>
+        </section>
+
+        <section class="contato-info">
+          <h2>Informações de contato</h2>
+          <p>E-mail: extensao@unifesspa.edu.br</p>
+          <p>
+            Endereço: Av. dos Estudantes, s/h - Cidade Universitária, Marabá -
+            PA, 68507-590
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-links">
+        <a href="sobre.html" data-page="sobre">Sobre</a>
+        <a href="contato.html" data-page="contato">Contato</a>
+        <a href="/politica" data-page="politica">Política de Privacidade</a>
+        <a href="/termos" data-page="termos">Termos de Serviço</a>
+      </div>
+      <p>©2023 Unifesspa+. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="../../js/openMenu.js"></script>
+  </body>
+</html>
